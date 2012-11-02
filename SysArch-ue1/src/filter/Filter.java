@@ -1,38 +1,73 @@
 package filter;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import pipe.IPipe;
 
 public abstract class Filter<in,out> implements IFilter<in, out>{
-
-	
-	private Collection<IPipe> inputPipes;
-	private Collection<IPipe> outputPipes;
-	private out result;
+	protected Collection<IPipe> inputPipes;
+	protected Collection<IPipe> outputPipes;
+	protected out result;
 	
 	public Filter(){
 		
 	}
 	
+	public void addInputPipe(IPipe pipe) {
+		inputPipes.add(pipe);
+	}
+	
+	public void addOutputPipe(IPipe pipe) {
+		outputPipes.add(pipe);
+	}
+	
+	public void removeInputPipe(IPipe pipe){
+		inputPipes.remove(pipe);
+	}
+	
+	public void removeOutputPipe(IPipe pipe){
+		outputPipes.remove(pipe);
+	}
+	
+	public boolean isFinished() {
+		boolean finished = false;
+		for (IPipe pipe : inputPipes) {
+			in temp = (in) pipe.pull();
+			
+			if (temp != null) {
+				finished = filter(temp);
+			}
+		}
+		return finished;
+	}
 	
 	@Override
-	public void push(in data){
+	public void push(in data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
 		if(filter(data)){
 			//send copy of data
+			for (IPipe pipe : outputPipes) {
+				pipe.push(getDeepCopy());
+			}
 		}
 	}
 	
 	@Override
 	public out pull() {
-		return null;
+		while (!isFinished()) {
+			pull();
+		}
+		return result;
 	}
 	
-	private boolean filter(in data){
-		
-		
-		
-		
+	
+	public out getDeepCopy() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
+		Constructor constr = result.getClass().getConstructor(result.getClass());
+		return (out) constr.newInstance(result);
+	}
+
+	public boolean filter(in data) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }
