@@ -5,35 +5,41 @@ import java.util.LinkedList;
 
 import filter.Filter;
 
-public class WordFilter<in, out> extends Filter<in,out>{
+public class LineFilter<in, out> extends Filter<in, out>{
+
+	private final int LINE_LENGTH;
 	
+	public LineFilter(int lineLength){
+		LINE_LENGTH = lineLength;
+	}
 	
-	public boolean filter(in data) {
-		char[] charArray = (char[])data;
+	public boolean filter(in data){
 		
-		LinkedList<String> words = new LinkedList();
-		StringBuilder word = new StringBuilder();
+		String[] wordArray = (String[]) data;
+		
+		LinkedList lines = new LinkedList();
+		StringBuilder line = new StringBuilder();
 		int i = 0;
 		
-		while(i < charArray.length){
-			if(charArray[i] == ' '){
-				words.add(word.toString());
-				word.delete(0, word.length());
+		while (i < wordArray.length){
+			if (line.length()+wordArray[i].length()+1 <= LINE_LENGTH){
+				line.append(wordArray[i]);
+				line.append(' ');
 				i++;
 			}else{
-				word.append(charArray[i]);
-				i++;
+				lines.add(line.toString());
+				line.delete(0, line.length());
 			}
 		}
 		
-		if (word.length() > 0){
-			words.add(word.toString());
+		if(line.length() > 0){
+			lines.add(line.toString());
 		}
 		
-		String[] wordArray = (String[]) words.toArray();
+		String[] lineArray = (String[]) lines.toArray();
 		
 		try {
-			push((in) wordArray);
+			push((in) lineArray);
 			return true;
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -56,11 +62,5 @@ public class WordFilter<in, out> extends Filter<in,out>{
 		}
 		
 		return false;
-		
 	}
-	
-	public WordFilter() {
-		
-	}
-	
 }

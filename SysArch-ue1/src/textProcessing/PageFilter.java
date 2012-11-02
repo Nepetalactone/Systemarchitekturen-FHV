@@ -5,35 +5,38 @@ import java.util.LinkedList;
 
 import filter.Filter;
 
-public class WordFilter<in, out> extends Filter<in,out>{
+public class PageFilter<in, out> extends Filter<in, out>{
+
+	private final int PAGE_LENGTH;
 	
+	public PageFilter(int pageLength){
+		PAGE_LENGTH = pageLength;
+	}
 	
-	public boolean filter(in data) {
-		char[] charArray = (char[])data;
+	public boolean filter(in data){
 		
-		LinkedList<String> words = new LinkedList();
-		StringBuilder word = new StringBuilder();
+		String[] lineArray = (String[]) data;
+		
+		StringBuilder page = new StringBuilder();
+		LinkedList pages = new LinkedList();
 		int i = 0;
 		
-		while(i < charArray.length){
-			if(charArray[i] == ' '){
-				words.add(word.toString());
-				word.delete(0, word.length());
+		while (i < lineArray.length){
+			if (page.length() + lineArray[i].length() <= PAGE_LENGTH){
+				page.append(lineArray[i].toString());
 				i++;
 			}else{
-				word.append(charArray[i]);
-				i++;
+				pages.add(page.toString());
+				page.delete(0, page.length());
 			}
 		}
 		
-		if (word.length() > 0){
-			words.add(word.toString());
+		if (page.length() > 0){
+			pages.add(page.toString());
 		}
 		
-		String[] wordArray = (String[]) words.toArray();
-		
 		try {
-			push((in) wordArray);
+			push((in) pages);
 			return true;
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -56,11 +59,5 @@ public class WordFilter<in, out> extends Filter<in,out>{
 		}
 		
 		return false;
-		
 	}
-	
-	public WordFilter() {
-		
-	}
-	
 }
