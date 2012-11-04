@@ -23,10 +23,11 @@ public class PageFilter<in, out> extends Filter<in, out>{
 		
 		while (i < lineArray.length){
 			if (page.length() + lineArray[i].length() <= PAGE_LENGTH){
-				page.append(lineArray[i].toString());
+				page.append(lineArray[i].toString() + "\n");
 				i++;
 			}else{
 				pages.add(page.toString());
+				pages.add("*************\n");
 				page.delete(0, page.length());
 			}
 		}

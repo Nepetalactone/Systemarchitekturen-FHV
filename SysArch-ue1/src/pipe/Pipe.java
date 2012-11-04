@@ -1,5 +1,6 @@
 package pipe;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import filter.IFilter;
 
@@ -25,7 +26,27 @@ public abstract class Pipe<T> implements IPipe<T> {
 		for (IFilter outputFilter : outputFilters) {
 			for (T element : buffer){
 				buffer.remove(element);
-				outputFilter.push(element);
+				try {
+					outputFilter.push(element);
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return element;
 			}
 		}
