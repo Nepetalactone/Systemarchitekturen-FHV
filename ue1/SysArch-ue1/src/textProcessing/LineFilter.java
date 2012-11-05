@@ -29,7 +29,7 @@ public class LineFilter<in, out> extends Filter<in, out>{
 			line.append(word);
 			curLine = line.toString();
 			if (curLine.contains("\r\n")) {
-				curLine = curLine.replaceAll("\r\n", "");
+				curLine = curLine.replaceAll("\r\n", " ");
 				curLine = curLine + "\r\n";
 				result = (out) curLine;
 				curLine = "";

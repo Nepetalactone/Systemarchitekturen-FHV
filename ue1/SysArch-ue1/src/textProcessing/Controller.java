@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Controller {
-	private static final String filePath = "C://Users//alice.txt"; 
+	private static final String filePath = "C://Users//christoph//Desktop//alice.txt"; 
 	
 	public static void main(String[] args){
 		try {

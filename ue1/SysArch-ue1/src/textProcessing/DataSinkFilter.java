@@ -10,7 +10,7 @@ public class DataSinkFilter<in,out> extends Filter<in, out> {
 	
 	public void writeFile () {
 		try {
-			File file = new File("C://Users//filter.txt");
+			File file = new File("C://Users//christoph//Desktop//filter.txt");
 			FileWriter writer = new FileWriter(file, true);
 			writer.write(text);
 			writer.flush();
