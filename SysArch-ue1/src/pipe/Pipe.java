@@ -2,6 +2,8 @@ package pipe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.LinkedList;
+
 import filter.IFilter;
 
 public abstract class Pipe<T> implements IPipe<T> {
@@ -9,48 +11,31 @@ public abstract class Pipe<T> implements IPipe<T> {
 	private Collection<IFilter> outputFilters;
 	private Collection<T> buffer;
 
-	public Pipe(Collection t) {
-		buffer = t;
+	public Pipe() {
+		inputFilters = new LinkedList<IFilter>();
+		outputFilters = new LinkedList<IFilter>();
+		buffer = new LinkedList<T>();
 	}
 	
-	public void push(T data){
-		buffer.add(data);
-	}
-	
-	public T pull() {
-		for (T element : buffer) {
-			for (IFilter outputFilter : outputFilters) {
-				
-			}
-		}
+	/**
+	 * Gibt Daten an die Output Filter weiter
+	 */
+	public void push(T data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
 		for (IFilter outputFilter : outputFilters) {
-			for (T element : buffer){
-				buffer.remove(element);
-				try {
-					outputFilter.push(element);
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return element;
-			}
+			outputFilter.push(data);
 		}
-		return null;
+	}
+	
+	/**
+	 * Holt Daten vom Input Filter in die Pipe
+	 */
+	public T pull() {
+		T data = null;
+		for (IFilter inputFilter : inputFilters) {
+			data = (T) inputFilter.pull();
+			buffer.add(data);
+		}
+		return data;
 	}
 	
 	public void addInputFilter(IFilter filter) {

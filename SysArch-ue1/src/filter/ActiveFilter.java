@@ -16,7 +16,8 @@ public abstract class ActiveFilter<in,out> extends Filter<in, out> {
 			for (IPipe inputPipe : inputPipes) {
 				pull();
 				for (IPipe outputPipe : outputPipes){
-					outputPipe.push(getDeepCopy());
+					//outputPipe.push(getDeepCopy());
+					outputPipe.push(result);
 				}
 			}
 		}

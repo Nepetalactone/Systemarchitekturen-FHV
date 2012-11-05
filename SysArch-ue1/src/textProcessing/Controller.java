@@ -5,24 +5,43 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Controller {
+	private static final String filePath = "C://Users//alice.txt"; 
 	
 	public static void main(String[] args){
 		try {
-		new Controller().start();
+			new Controller().init();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void start() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
+	public void init() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
+		//Pipe anlegen
+		TextPipe sourcePipe = new TextPipe();
+		TextPipe wordPipe = new TextPipe();
+		TextPipe linePipe = new TextPipe();
+		TextPipe pagePipe = new TextPipe();
+		
+		//Filter anlegen
+		SourceFilter sourceFilter = new SourceFilter();
 		WordFilter wordFilter = new WordFilter();
-		SourcePipe source = new SourcePipe(new LinkedList<String>()); 
+		LineFilter lineFilter = new LineFilter(50); //30 entspricht die max. Anzahl der Zeichen einer Zeile
+		PageFilter pageFilter = new PageFilter(10); //15 enspricht der zeilenanzahl
+		DataSinkFilter dataSinkFilter = new DataSinkFilter();
 		
+		//Pipe zuweisen
+		sourceFilter.addOutputPipe(sourcePipe);
+		wordFilter.addOutputPipe(wordPipe);
+		lineFilter.addOutputPipe(linePipe);
+		pageFilter.addOutputPipe(pagePipe);
 		
-		source.addOutputFilter(wordFilter);
-		source.push("asdfasdf asdfafdsaf 34234");
+		//Filter zuweisen
+		sourcePipe.addOutputFilter(wordFilter);
+		wordPipe.addOutputFilter(lineFilter);
+		linePipe.addOutputFilter(pageFilter);
+		pagePipe.addOutputFilter(dataSinkFilter);
 		
-		wordFilter.push(source.pull());
-		
+		//Dokument einlesen und Vorgang starten
+		sourceFilter.readFile(filePath);
 	}
 }
