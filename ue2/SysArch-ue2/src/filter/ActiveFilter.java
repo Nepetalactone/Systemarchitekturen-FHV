@@ -7,23 +7,16 @@ public abstract class ActiveFilter<in,out> extends Filter<in, out> {
 	boolean notEndOfStream;
 	
 	public ActiveFilter(){
-		super();
+            super();
 	}
 
-	public void run() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
-		notEndOfStream = true;
-		while (notEndOfStream) {
-			for (IPipe inputPipe : inputPipes) {
-				pull();
-				for (IPipe outputPipe : outputPipes){
-					//outputPipe.push(getDeepCopy());
-					outputPipe.push(result);
-				}
-			}
-		}
-	}
+        
+	public abstract void run() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException;
 	
 	public void stop() {
 		notEndOfStream = false;
 	}
+        
+//        @Override
+//        public abstract boolean filter(in data);
 }

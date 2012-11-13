@@ -4,12 +4,17 @@
  */
 package bildverarbeitung.pipes;
 
+import filter.IFilter;
 import pipe.Pipe;
 
 /**
  *
  * @author Tobias
  */
-public class ImagePipe extends Pipe{
+public class ImagePipe<T> extends Pipe<T>{
+    
+    public ImagePipe(){
+        super();
+    }
     
 }

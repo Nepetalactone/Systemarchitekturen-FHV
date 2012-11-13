@@ -16,18 +16,22 @@ public abstract class Filter<in,out> implements IFilter<in, out>{
 		outputPipes = new LinkedList<IPipe>();
 	}
 	
+        @Override
 	public void addInputPipe(IPipe pipe) {
 		inputPipes.add(pipe);
 	}
 	
+        @Override
 	public void addOutputPipe(IPipe pipe) {
 		outputPipes.add(pipe);
 	}
 	
+        @Override
 	public void removeInputPipe(IPipe pipe){
 		inputPipes.remove(pipe);
 	}
 	
+        @Override
 	public void removeOutputPipe(IPipe pipe){
 		outputPipes.remove(pipe);
 	}
@@ -49,14 +53,12 @@ public abstract class Filter<in,out> implements IFilter<in, out>{
 	 */
 	@Override
 	public void push(in data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
-		
-		if(filter(data)){
-			//send copy of data
-			for (IPipe pipe : outputPipes) {
-				//pipe.push(getDeepCopy());
-				pipe.push(result);
-			}
-		}
+                if(filter(data)){
+                    for (IPipe pipe : outputPipes) {
+                        //pipe.push(getDeepCopy());
+                        pipe.push(result);
+                    }
+                }
 	}
 	
 	/**
@@ -75,7 +77,6 @@ public abstract class Filter<in,out> implements IFilter<in, out>{
 //		return (out) constr.newInstance(result);
 //	}
 	
-	public boolean filter(in data) {
-		return true;
-	}
+//    @Override
+//    public abstract boolean filter(in data);
 }
