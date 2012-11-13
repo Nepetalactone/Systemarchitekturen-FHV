@@ -26,9 +26,9 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         //0,254,0
         //
         ROIImage roiImage = (ROIImage) data;
-        double[] low = new double[]{0,254,0};
-        double [] high = new double[]{0,30,255};
-        double [] constants = new double[]{0,0,0};
+        double[] low = new double[]{0,0,0};
+        double [] high = new double[]{30,30,30};
+        double [] constants = new double[]{255,255,255};
         
         ParameterBlock pb = new ParameterBlock();
         pb.addSource(roiImage.getImg());
