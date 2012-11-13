@@ -27,7 +27,7 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         //
         ROIImage roiImage = (ROIImage) data;
         double[] low = new double[]{0,0,0};
-        double [] high = new double[]{30,30,30};
+        double [] high = new double[]{33,33,33};
         double [] constants = new double[]{255,255,255};
         
         ParameterBlock pb = new ParameterBlock();
@@ -36,7 +36,9 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         pb.add(high);
         pb.add(constants);
         RenderedImage thresh = JAI.create("threshold", pb);
-        Painter p = new Painter("Threshold",new ThreshImage(thresh,roiImage.getOriginal()));
+        ThreshImage threshPack = new ThreshImage(thresh,roiImage.getOriginal());
+        Painter p = new Painter("Threshold",threshPack);
+        result = (out) threshPack;
         return true;
         
     }

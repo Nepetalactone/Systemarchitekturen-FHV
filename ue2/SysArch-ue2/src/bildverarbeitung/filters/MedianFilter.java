@@ -4,7 +4,9 @@
  */
 package bildverarbeitung.filters;
 
+import bildverarbeitung.filterObjects.ThreshImage;
 import filter.Filter;
+import java.awt.image.renderable.ParameterBlock;
 
 /**
  *
@@ -14,7 +16,16 @@ public class MedianFilter<in,out> extends Filter<in,out>{
 
     @Override
     public boolean filter(in data) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        
+        ThreshImage ti = (ThreshImage) data;
+        
+        
+        ParameterBlock pb = new ParameterBlock();
+        pb.addSource(ti.getImage());
+        
+        
+        return false;
     }
     
 }
