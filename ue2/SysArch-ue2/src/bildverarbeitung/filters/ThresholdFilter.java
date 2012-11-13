@@ -37,7 +37,7 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         pb.add(constants);
         RenderedImage thresh = JAI.create("threshold", pb);
         Painter p = new Painter("Threshold",new ThreshImage(thresh,roiImage.getOriginal()));
-        return false;
+        return true;
         
     }
     
