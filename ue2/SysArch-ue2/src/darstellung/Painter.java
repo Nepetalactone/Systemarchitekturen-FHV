@@ -5,11 +5,11 @@
 package darstellung;
 
 import bildverarbeitung.filterObjects.IImagePackage;
-import bildverarbeitung.filterObjects.MedianImage;
-import bildverarbeitung.filterObjects.ROIImage;
-import bildverarbeitung.filterObjects.RawImage;
-import bildverarbeitung.filterObjects.ResultImage;
-import bildverarbeitung.filterObjects.ThreshImage;
+import bildverarbeitung.filterObjects.MedianPackage;
+import bildverarbeitung.filterObjects.ROIPackage;
+import bildverarbeitung.filterObjects.RawPackage;
+import bildverarbeitung.filterObjects.ResultPackage;
+import bildverarbeitung.filterObjects.ThreshPackage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,11 +36,11 @@ public class Painter extends JFrame {
             
             public void paintComponent(Graphics g){
                 Graphics2D g2d = (Graphics2D) g;
-                if(imgPack instanceof RawImage){
-                    RawImage r = (RawImage) imgPack;
+                if(imgPack instanceof RawPackage){
+                    RawPackage r = (RawPackage) imgPack;
                     drawImage(g2d,imgPack.getImage());
-                }else if(imgPack instanceof ROIImage){
-                    ROIImage r = (ROIImage) imgPack;
+                }else if(imgPack instanceof ROIPackage){
+                    ROIPackage r = (ROIPackage) imgPack;
                     if(r.isShowRectangle()){
                         drawImage(g2d,r.getOriginal());
                         Rectangle rec = r.getRectangle();
@@ -49,13 +49,18 @@ public class Painter extends JFrame {
                     }else{
                         drawImage(g2d,r.getImage());
                     }
-                }else if(imgPack instanceof ThreshImage){
-                    ThreshImage t = (ThreshImage) imgPack;
-                    drawImage(g2d,t.getImage());
-                }else if(imgPack instanceof MedianImage){
-                    MedianImage m = (MedianImage) imgPack;
-                }else if(imgPack instanceof ResultImage){
-                    ResultImage r = (ResultImage) imgPack;
+                }else if(imgPack instanceof ThreshPackage){
+                    ThreshPackage t = (ThreshPackage) imgPack;
+                    if(t.isShowOriginal()){
+                        drawImage(g2d,t.getOriginal());
+                    }else{
+                        drawImage(g2d,t.getImage());
+                    }
+                    
+                }else if(imgPack instanceof MedianPackage){
+                    MedianPackage m = (MedianPackage) imgPack;
+                }else if(imgPack instanceof ResultPackage){
+                    ResultPackage r = (ResultPackage) imgPack;
                 }
             }
 

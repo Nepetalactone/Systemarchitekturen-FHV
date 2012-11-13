@@ -4,8 +4,8 @@
  */
 package bildverarbeitung.filters;
 
-import bildverarbeitung.filterObjects.ROIImage;
-import bildverarbeitung.filterObjects.ThreshImage;
+import bildverarbeitung.filterObjects.ROIPackage;
+import bildverarbeitung.filterObjects.ThreshPackage;
 import darstellung.Painter;
 import filter.Filter;
 import java.awt.image.RenderedImage;
@@ -25,7 +25,7 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         //0,30,255
         //0,254,0
         //
-        ROIImage roiImage = (ROIImage) data;
+        ROIPackage roiImage = (ROIPackage) data;
         double[] low = new double[]{0,0,0};
         double [] high = new double[]{33,33,33};
         double [] constants = new double[]{255,255,255};
@@ -36,7 +36,7 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         pb.add(high);
         pb.add(constants);
         RenderedImage thresh = JAI.create("threshold", pb);
-        ThreshImage threshPack = new ThreshImage(thresh,roiImage.getOriginal());
+        ThreshPackage threshPack = new ThreshPackage(thresh,roiImage.getOriginal(),false);
         Painter p = new Painter("Threshold",threshPack);
         result = (out) threshPack;
         return true;

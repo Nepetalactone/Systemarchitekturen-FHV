@@ -11,7 +11,7 @@ import java.awt.image.RenderedImage;
  *
  * @author Tobias
  */
-public class RawImage implements IImagePackage {
+public class RawPackage implements IImagePackage {
     
     private BufferedImage img;
     private int minX;
@@ -20,7 +20,7 @@ public class RawImage implements IImagePackage {
     private int maxY;
 
     
-    public RawImage(BufferedImage img, int minX, int minY, int maxX, int maxY) {
+    public RawPackage(BufferedImage img, int minX, int minY, int maxX, int maxY) {
         this.img = img;
         this.minX = minX;
         this.minY = minY;

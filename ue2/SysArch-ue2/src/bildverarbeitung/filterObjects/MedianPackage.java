@@ -11,7 +11,7 @@ import java.awt.image.RenderedImage;
  *
  * @author Tobias
  */
-public class MedianImage implements IImagePackage {
+public class MedianPackage implements IImagePackage {
 
     @Override
     public RenderedImage getImage() {

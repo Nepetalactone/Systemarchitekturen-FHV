@@ -11,15 +11,17 @@ import java.awt.image.RenderedImage;
  *
  * @author Tobias
  */
-public class ThreshImage  implements IImagePackage {
+public class ThreshPackage  implements IImagePackage {
 
     
     private RenderedImage image;
     private BufferedImage original;
+    private boolean showOriginal;
 
-    public ThreshImage(RenderedImage image,BufferedImage original) {
+    public ThreshPackage(RenderedImage image,BufferedImage original, boolean showOriginal) {
         this.image = image;
         this.original = original;
+        this.showOriginal = showOriginal;
     }
     
     @Override
@@ -30,6 +32,10 @@ public class ThreshImage  implements IImagePackage {
     @Override
     public BufferedImage getOriginal() {
         return original;
+    }
+
+    public boolean isShowOriginal() {
+        return showOriginal;
     }
     
 }

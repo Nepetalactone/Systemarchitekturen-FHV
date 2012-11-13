@@ -11,7 +11,7 @@ import java.awt.image.RenderedImage;
  *
  * @author Tobias
  */
-public class ResultImage implements IImagePackage {
+public class ResultPackage implements IImagePackage {
 
     @Override
     public RenderedImage getImage() {

@@ -13,7 +13,7 @@ import javax.media.jai.PlanarImage;
  *
  * @author Tobias
  */
-public class ROIImage implements IImagePackage  {
+public class ROIPackage implements IImagePackage  {
     
     
     private PlanarImage img;
@@ -21,7 +21,7 @@ public class ROIImage implements IImagePackage  {
     private Rectangle rectangle;
     private boolean showRectangle;
 
-    public ROIImage(PlanarImage img, BufferedImage original, Rectangle rectangle, boolean showRectangle) {
+    public ROIPackage(PlanarImage img, BufferedImage original, Rectangle rectangle, boolean showRectangle) {
         this.img = img;
         this.original = original;
         this.rectangle = rectangle;

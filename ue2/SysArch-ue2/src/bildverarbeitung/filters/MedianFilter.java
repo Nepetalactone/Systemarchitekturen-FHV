@@ -4,7 +4,7 @@
  */
 package bildverarbeitung.filters;
 
-import bildverarbeitung.filterObjects.ThreshImage;
+import bildverarbeitung.filterObjects.ThreshPackage;
 import filter.Filter;
 import java.awt.image.renderable.ParameterBlock;
 
@@ -18,7 +18,7 @@ public class MedianFilter<in,out> extends Filter<in,out>{
     public boolean filter(in data) {
         
         
-        ThreshImage ti = (ThreshImage) data;
+        ThreshPackage ti = (ThreshPackage) data;
         
         
         ParameterBlock pb = new ParameterBlock();

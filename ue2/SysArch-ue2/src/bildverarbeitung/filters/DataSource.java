@@ -4,7 +4,7 @@
  */
 package bildverarbeitung.filters;
 
-import bildverarbeitung.filterObjects.RawImage;
+import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.pipes.ImagePipe;
 import darstellung.Painter;
 import filter.ActiveFilter;
@@ -51,7 +51,7 @@ public class DataSource<in,out> extends ActiveFilter<in,out> {
         BufferedImage buffer = getImage((String)data);
         
         if(buffer != null){
-            RawImage ri = new RawImage(buffer, 0, 50, 447, 55);
+            RawPackage ri = new RawPackage(buffer, 0, 50, 447, 55);
             super.result = (out) ri;
             
             Painter p = new Painter("Source",ri);
