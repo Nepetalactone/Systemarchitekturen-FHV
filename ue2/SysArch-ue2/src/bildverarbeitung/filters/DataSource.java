@@ -6,6 +6,7 @@ package bildverarbeitung.filters;
 
 import bildverarbeitung.filterObjects.RawImage;
 import bildverarbeitung.pipes.ImagePipe;
+import darstellung.Painter;
 import filter.ActiveFilter;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -48,8 +49,14 @@ public class DataSource<in,out> extends ActiveFilter<in,out> {
     @Override
     public boolean filter(in data) {
         BufferedImage buffer = getImage((String)data);
+        
         if(buffer != null){
-            super.result = (out) new RawImage(buffer,new Point(11,11), new Point(22,22));
+            RawImage ri = new RawImage(buffer, 0, 50, 447, 55);
+            super.result = (out) ri;
+            
+            Painter p = new Painter("Source",ri);
+            
+            
             return true;
         }
         return false;

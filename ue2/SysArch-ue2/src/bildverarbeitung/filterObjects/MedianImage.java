@@ -4,10 +4,23 @@
  */
 package bildverarbeitung.filterObjects;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+
 /**
  *
  * @author Tobias
  */
-public class MedianImage {
+public class MedianImage implements IImagePackage {
+
+    @Override
+    public RenderedImage getImage() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BufferedImage getOriginal() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

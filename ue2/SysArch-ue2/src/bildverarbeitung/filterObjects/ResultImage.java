@@ -4,10 +4,23 @@
  */
 package bildverarbeitung.filterObjects;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+
 /**
  *
  * @author Tobias
  */
-public class ResultImage {
+public class ResultImage implements IImagePackage {
+
+    @Override
+    public RenderedImage getImage() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BufferedImage getOriginal() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

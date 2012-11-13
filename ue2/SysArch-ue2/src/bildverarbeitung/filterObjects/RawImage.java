@@ -4,24 +4,31 @@
  */
 package bildverarbeitung.filterObjects;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 /**
  *
  * @author Tobias
  */
-public class RawImage {
+public class RawImage implements IImagePackage {
     
     private BufferedImage img;
-    private Point pointA;
-    private Point pointB;
+    private int minX;
+    private int minY;
+    private int maxX;
+    private int maxY;
+
     
-    public RawImage(BufferedImage img, Point a, Point b){
+    public RawImage(BufferedImage img, int minX, int minY, int maxX, int maxY) {
         this.img = img;
-        this.pointA = a;
-        this.pointB = b;
+        this.minX = minX;
+        this.minY = minY;
+        this.maxX = maxX;
+        this.maxY = maxY;
     }
+    
+    
     public BufferedImage getImg(){
         return img;
     }
@@ -29,20 +36,45 @@ public class RawImage {
         this.img = img;
     }
 
-    public Point getPointA() {
-        return pointA;
+    @Override
+    public RenderedImage getImage() {
+        return img;
     }
 
-    public void setPointA(Point pointA) {
-        this.pointA = pointA;
+    @Override
+    public BufferedImage getOriginal() {
+        return this.img;
     }
 
-    public Point getPointB() {
-        return pointB;
+    public int getMinX() {
+        return minX;
     }
 
-    public void setPointB(Point pointB) {
-        this.pointB = pointB;
+    public void setMinX(int minX) {
+        this.minX = minX;
     }
-    
+
+    public int getMinY() {
+        return minY;
+    }
+
+    public void setMinY(int minY) {
+        this.minY = minY;
+    }
+
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public void setMaxX(int maxX) {
+        this.maxX = maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public void setMaxY(int maxY) {
+        this.maxY = maxY;
+    }
 }
