@@ -4,11 +4,8 @@
  */
 package test;
 
-import bildverarbeitung.filters.DataSink;
-import bildverarbeitung.filters.DataSource;
-import bildverarbeitung.filters.MedianFilter;
-import bildverarbeitung.filters.ROIFilter;
-import bildverarbeitung.filters.ThresholdFilter;
+import bildverarbeitung.filterObjects.CentroidFilter;
+import bildverarbeitung.filters.*;
 import bildverarbeitung.pipes.ImagePipe;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
@@ -27,7 +24,9 @@ public class test {
         ImagePipe p2 = new ImagePipe();
         ImagePipe p3 = new ImagePipe();
         ImagePipe p4 = new ImagePipe();
-        
+        ImagePipe p5 = new ImagePipe();
+        ImagePipe p6 = new ImagePipe();
+        ImagePipe p7 = new ImagePipe();
         
         DataSource source = new DataSource();
         source.addOutputPipe(p1);
@@ -46,10 +45,24 @@ public class test {
         p3.addInputFilter(thresh);
         p3.addOutputFilter(median);
         
+        ErodeFilter erode = new ErodeFilter();
+        erode.addOutputPipe(p5);
+        p4.addInputFilter(median);
+        p4.addOutputFilter(erode);
+        
+        DilateFilter dilate = new DilateFilter();
+        dilate.addOutputPipe(p6);
+        p5.addInputFilter(erode);
+        p5.addOutputFilter(dilate);
+        
+        CentroidFilter centroid = new CentroidFilter();
+        centroid.addOutputPipe(p7);
+        p6.addInputFilter(dilate);
+        p6.addOutputFilter(centroid);
         
         DataSink sink = new DataSink();
-        p4.addInputFilter(median);
-        p4.addOutputFilter(sink);
+        p7.addInputFilter(centroid);
+        p7.addOutputFilter(sink);
         
         try {
             source.run();

@@ -4,12 +4,7 @@
  */
 package darstellung;
 
-import bildverarbeitung.filterObjects.IImagePackage;
-import bildverarbeitung.filterObjects.MedianPackage;
-import bildverarbeitung.filterObjects.ROIPackage;
-import bildverarbeitung.filterObjects.RawPackage;
-import bildverarbeitung.filterObjects.ResultPackage;
-import bildverarbeitung.filterObjects.ThreshPackage;
+import bildverarbeitung.filterObjects.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -59,8 +54,15 @@ public class Painter extends JFrame {
                     
                 }else if(imgPack instanceof MedianPackage){
                     MedianPackage m = (MedianPackage) imgPack;
+                    drawImage(g2d, m.getImage());
                 }else if(imgPack instanceof ResultPackage){
                     ResultPackage r = (ResultPackage) imgPack;
+                }else if(imgPack instanceof ErodePackage){
+                    ErodePackage e = (ErodePackage) imgPack;
+                    drawImage(g2d, e.getImage());
+                }else if(imgPack instanceof DilatePackage){
+                    DilatePackage d = (DilatePackage) imgPack;
+                    drawImage(g2d, d.getImage());
                 }
             }
 
