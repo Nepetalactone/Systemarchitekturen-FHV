@@ -5,6 +5,8 @@
 package test;
 
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
+import java.util.LinkedList;
 import javax.media.jai.KernelJAI;
 
 /**
@@ -29,12 +31,20 @@ public class Journal {
     private double[] thresholdHigh;
     private double[] thresholdConstants;
     //Median variables
+    
     //Erode variables  
     private KernelJAI erodeKernel;
+    
     //Dilate variables
     private KernelJAI dilateKernel;
+    
+    //Centroid variables
+    Point2D asdf = new Point2D.Double();
+    LinkedList<Point2D> centerList= new LinkedList<Point2D>();
+    
     //ROI2 variables
     private Rectangle[] roi2Rectangles;
+    
     //DataSink variables
     private int sinkCount;
 
@@ -65,12 +75,16 @@ public class Journal {
     public void setSinkCount(int count) {
         this.sinkCount = count;
     }
+    
+    public void addCenterPoint(int x, int y){
+        this.centerList.add(new Point2D.Double(x, y));
+    }
 
     public void print() {
         System.out.println("Threshold low: " + thresholdLow[0] + ", " + thresholdLow[1] + ", " + thresholdLow[2]);
         System.out.println("Threshold low: " + thresholdHigh[0] + ", " + thresholdHigh[1] + ", " + thresholdHigh[2]);
-        System.out.println("Threshold low: " + thresholdConstants[0] + ", " + thresholdConstants[1] + ", " + thresholdConstants[2]);
-        System.out.println("Erode KernelJAI: \n");
+        System.out.println("Threshold low: " + thresholdConstants[0] + ", " + thresholdConstants[1] + ", " + thresholdConstants[2] + "\n");
+        System.out.println("Erode KernelJAI:");
         
         int i = 0;
         int j = 0;
@@ -89,6 +103,7 @@ public class Journal {
         j = 0;
         
         System.out.println();
+        System.out.println("Dilate KernelJAI");
         while (i < dilateKernel.getHeight()){
             while (j < dilateKernel.getWidth()){
                 System.out.print(dilateKernel.getElement(i, j) + ", ");
@@ -98,12 +113,19 @@ public class Journal {
             j = 0;
             i++;
         }
-        
-        System.out.println("Rectangles\n");
+        System.out.println();
+        System.out.println("Rectangles");
         for (Rectangle rect : roi2Rectangles){
             System.out.println(" X: " + rect.x + " Y: " + rect.y + " Width: " + rect.width + " Heigth: " + rect.height);
         }
         
+        System.out.println();
+        System.out.println("Mittelpunkte");
+        for (Point2D point : centerList){
+            System.out.println("X: " + point.getX() + " Y: " + point.getY());
+        }
+        
+        System.out.println();
         System.out.println("Ballcount: " + sinkCount);
     }
 }

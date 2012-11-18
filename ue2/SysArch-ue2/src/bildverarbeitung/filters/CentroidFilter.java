@@ -17,6 +17,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.util.Hashtable;
+import test.Journal;
 
 /**
  *
@@ -33,7 +34,7 @@ public class CentroidFilter extends Filter{
         
         CentroidPackage centPack = new CentroidPackage(dilPack.getOriginal(),dilPack.getImage(),center);
         result = centPack;
-        System.out.println("Center: x = "+ center.x + ", " + center.y);
+        Journal.getInstance().addCenterPoint(center.x, center.y);
         return true;
         
     }
