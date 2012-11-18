@@ -41,7 +41,7 @@ public class DilateFilter extends Filter{
         RenderedImage img = JAI.create("Dilate", pb);
         DilatePackage dilPack = new DilatePackage(eroPack.getOriginal(), img);
         Painter p = new Painter("Dilate", dilPack);
-        
+        result = dilPack;
         return true;
     }
     

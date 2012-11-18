@@ -5,20 +5,13 @@
 package bildverarbeitung.filters;
 
 import bildverarbeitung.filterObjects.RawPackage;
-import bildverarbeitung.pipes.ImagePipe;
 import darstellung.Painter;
 import filter.ActiveFilter;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import pipe.IPipe;
 
 /**
  *
@@ -51,7 +44,8 @@ public class DataSource<in,out> extends ActiveFilter<in,out> {
         BufferedImage buffer = getImage((String)data);
         
         if(buffer != null){
-            RawPackage ri = new RawPackage(buffer, 0, 50, 447, 55);
+            //0, 50, 447, 55
+            RawPackage ri = new RawPackage(buffer);
             super.result = (out) ri;
             
             Painter p = new Painter("Source",ri);

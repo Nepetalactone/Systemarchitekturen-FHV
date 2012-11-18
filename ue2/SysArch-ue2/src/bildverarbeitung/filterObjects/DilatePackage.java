@@ -16,6 +16,11 @@ public class DilatePackage implements IImagePackage{
     private BufferedImage original;
     private RenderedImage image;
 
+    public DilatePackage(BufferedImage original, RenderedImage image) {
+        this.original = original;
+        this.image = image;
+    }
+    
     @Override
     public RenderedImage getImage() {
         return image;
@@ -24,11 +29,6 @@ public class DilatePackage implements IImagePackage{
     @Override
     public BufferedImage getOriginal() {
         return original;
-    }
-
-    public DilatePackage(BufferedImage original, RenderedImage image) {
-        this.original = original;
-        this.image = image;
     }
     
 }

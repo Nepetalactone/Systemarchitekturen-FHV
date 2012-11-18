@@ -13,14 +13,22 @@ import java.awt.image.RenderedImage;
  */
 public class ResultPackage implements IImagePackage {
 
+    private BufferedImage original;
+    private RenderedImage image;
+
+    public ResultPackage(BufferedImage original, RenderedImage image) {
+        this.original = original;
+        this.image = image;
+    }
+    
     @Override
     public RenderedImage getImage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return image;
     }
 
     @Override
     public BufferedImage getOriginal() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return original;
     }
-    
+
 }

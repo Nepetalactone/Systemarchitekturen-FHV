@@ -10,9 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import javax.media.jai.widget.ImageCanvas;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -40,7 +38,7 @@ public class Painter extends JFrame {
                         drawImage(g2d,r.getOriginal());
                         Rectangle rec = r.getRectangle();
                         g2d.setColor(Color.white);
-                        g2d.drawRect((int)rec.getMinX(), (int)rec.getMinY(), (int)rec.getMaxX(), (int)rec.getMaxY());
+                        g2d.drawRect((int)rec.getMinX(), (int)rec.getMinY(), (int)rec.getMaxX(), (int)rec.getMaxY()/2 +5);//kA warum aber as resultierende img isch kleiner als as rechteck ...
                     }else{
                         drawImage(g2d,r.getImage());
                     }
@@ -51,7 +49,6 @@ public class Painter extends JFrame {
                     }else{
                         drawImage(g2d,t.getImage());
                     }
-                    
                 }else if(imgPack instanceof MedianPackage){
                     MedianPackage m = (MedianPackage) imgPack;
                     drawImage(g2d, m.getImage());
@@ -63,6 +60,9 @@ public class Painter extends JFrame {
                 }else if(imgPack instanceof DilatePackage){
                     DilatePackage d = (DilatePackage) imgPack;
                     drawImage(g2d, d.getImage());
+                }else if(imgPack instanceof CentroidPackage){
+                    CentroidPackage p = (CentroidPackage) imgPack;
+                    drawImage(g2d, p.getImage());
                 }
             }
 
