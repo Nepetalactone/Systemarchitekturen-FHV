@@ -53,15 +53,18 @@ public class test {
         pMedianToErode.addOutputFilter(erode);
 
         DilateFilter dilate = new DilateFilter();
-        dilate.addOutputPipe(pRoi2ToCentroid);
+        dilate.addOutputPipe(pDilateToRoi2);
         pErodeToDilate.addInputFilter(erode);
         pErodeToDilate.addOutputFilter(dilate);
 
-        //TODO ROIFilter 2
+        ROIFilter2 roi2 = new ROIFilter2();
+        roi2.addOutputPipe(pRoi2ToCentroid);
+        pDilateToRoi2.addInputFilter(dilate);
+        pDilateToRoi2.addOutputFilter(roi2);
         
         CentroidFilter centroid = new CentroidFilter();
         centroid.addOutputPipe(pCentroidToSink);
-        pRoi2ToCentroid.addInputFilter(dilate);
+        pRoi2ToCentroid.addInputFilter(roi2);
         pRoi2ToCentroid.addOutputFilter(centroid);
 
         DataSink sink = new DataSink();
