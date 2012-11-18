@@ -6,6 +6,9 @@ package bildverarbeitung.filters;
 
 import bildverarbeitung.filterObjects.CentroidPackage;
 import bildverarbeitung.filterObjects.DilatePackage;
+import bildverarbeitung.filterObjects.ROI2Package;
+import bildverarbeitung.filterObjects.ROIPackage;
+import darstellung.Painter;
 import filter.Filter;
 import java.awt.Color;
 import java.awt.Point;
@@ -23,7 +26,7 @@ public class CentroidFilter extends Filter{
 
     @Override
     public boolean filter(Object data) {
-        DilatePackage dilPack = (DilatePackage) data;
+        ROIPackage dilPack = (ROIPackage) data;
         
         BufferedImage b = convertRenderedImage(dilPack.getImage());
         Point center = getCenter(b);

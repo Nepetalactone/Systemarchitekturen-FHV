@@ -14,7 +14,7 @@ public class DataSink<in,out> extends Filter<in,out>{
 
     @Override
     public boolean filter(in data) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
     
 }

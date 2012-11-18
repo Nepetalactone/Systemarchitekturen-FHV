@@ -7,11 +7,21 @@ package bildverarbeitung.filters;
 import bildverarbeitung.filterObjects.DilatePackage;
 import bildverarbeitung.filterObjects.ROI2Package;
 import bildverarbeitung.filterObjects.ROIPackage;
+import darstellung.Painter;
 import filter.Filter;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
+import java.awt.image.WritableRaster;
+import java.awt.image.renderable.ParameterBlock;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.PlanarImage;
+import pipe.IPipe;
+import pipe.Pipe;
 
 /**
  *
@@ -22,23 +32,67 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
     @Override
     public boolean filter(in data) {
         DilatePackage rp = (DilatePackage) data;
-        Rectangle[] rects = new Rectangle[]{new Rectangle(0, 0, 40, 57),
-            new Rectangle(40, 0, 60, 57),
-            new Rectangle(100, 0, 160, 57),
-            new Rectangle(160, 0, 240, 57),
-            new Rectangle(240, 0, 300, 57),
-            new Rectangle(300, 0, 360, 57),
-            new Rectangle(360, 0, 420, 57)};
+        Rectangle[] rects = new Rectangle[]{
+            new Rectangle(0, 10, 20, 57),
+            new Rectangle(40, 10, 20, 57),
+            new Rectangle(100, 10, 20, 57),
+            new Rectangle(160, 10, 20, 57),
+            new Rectangle(240, 10, 20, 57),
+            new Rectangle(300, 10, 20, 57),
+            new Rectangle(360, 10, 20, 57)
+        };
 
         ROIFilter filter;
         for (Rectangle rect : rects) {
-            BufferedImage img = (BufferedImage) rp.getOriginal();
+            RenderedImage img = (RenderedImage) rp.getImage();
             PlanarImage image = PlanarImage.wrapRenderedImage(img);
+
             image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(rect, image.getColorModel()));
-            ROIPackage roiImage = new ROIPackage(image, rp.getOriginal(), rect, true);
+            ROIPackage roiImage = new ROIPackage(image, convertRenderedImage(rp.getImage()), rect, true);
+            
+            Painter p = new Painter("ROIFilter",roiImage);
+            
             result = (out) roiImage;
+            for (IPipe pipe : outputPipes){
+                try {
+                    pipe.push(result);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(ROIFilter2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         return true;
     }
+    
+    public BufferedImage convertRenderedImage(RenderedImage img) {
+		if (img instanceof BufferedImage) {
+			return (BufferedImage)img;	
+		}	
+		ColorModel cm = img.getColorModel();
+		int width = img.getWidth();
+		int height = img.getHeight();
+		WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		Hashtable properties = new Hashtable();
+		String[] keys = img.getPropertyNames();
+		if (keys!=null) {
+			for (int i = 0; i < keys.length; i++) {
+				properties.put(keys[i], img.getProperty(keys[i]));
+			}
+		}
+		BufferedImage result = new BufferedImage(cm, raster, isAlphaPremultiplied, properties);
+		img.copyData(raster);
+		return result;
+	}
 }
