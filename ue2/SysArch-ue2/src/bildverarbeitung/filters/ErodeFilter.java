@@ -12,6 +12,7 @@ import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
+import test.Journal;
 
 /**
  *
@@ -34,6 +35,8 @@ public class ErodeFilter extends Filter{
         0,0,0,1,1,1,1,1,0,0,0,
         0,0,0,0,0,1,0,0,0,0,0,
         });
+        
+        Journal.getInstance().setErodeKernel(k);
         
         ParameterBlock pb = new ParameterBlock();
         MedianPackage medPack = (MedianPackage) data;

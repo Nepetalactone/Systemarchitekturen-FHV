@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.media.jai.PlanarImage;
 import pipe.IPipe;
 import pipe.Pipe;
+import test.Journal;
 
 /**
  *
@@ -34,21 +35,23 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
         DilatePackage rp = (DilatePackage) data;
         Rectangle[] rects = new Rectangle[]{
             new Rectangle(0, 10, 20, 57),
-            new Rectangle(40, 10, 20, 57),
-            new Rectangle(100, 10, 20, 57),
-            new Rectangle(160, 10, 20, 57),
-            new Rectangle(240, 10, 20, 57),
-            new Rectangle(300, 10, 20, 57),
-            new Rectangle(360, 10, 20, 57)
+            new Rectangle(40, 10, 60, 57),
+            new Rectangle(100, 10, 60, 57),
+            new Rectangle(160, 10, 80, 57),
+            new Rectangle(240, 10, 60, 57),
+            new Rectangle(300, 10, 60, 57),
+            new Rectangle(360, 10, 60, 57)
         };
-
+        
+        Journal.getInstance().setRoi2Rectangles(rects);
+        
         ROIFilter filter;
         for (Rectangle rect : rects) {
             RenderedImage img = (RenderedImage) rp.getImage();
             PlanarImage image = PlanarImage.wrapRenderedImage(img);
 
             image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(rect, image.getColorModel()));
-            ROIPackage roiImage = new ROIPackage(image, convertRenderedImage(rp.getImage()), rect, true);
+            ROIPackage roiImage = new ROIPackage(image, convertRenderedImage(rp.getImage()), rect, false);
             
             Painter p = new Painter("ROIFilter",roiImage);
             

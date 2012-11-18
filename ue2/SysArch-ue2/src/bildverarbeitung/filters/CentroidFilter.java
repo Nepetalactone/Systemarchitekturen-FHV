@@ -33,7 +33,7 @@ public class CentroidFilter extends Filter{
         
         CentroidPackage centPack = new CentroidPackage(dilPack.getOriginal(),dilPack.getImage(),center);
         result = centPack;
-        System.out.println("Center: "+center);
+        System.out.println("Center: x = "+ center.x + ", " + center.y);
         return true;
         
     }

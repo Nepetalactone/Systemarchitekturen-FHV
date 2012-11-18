@@ -73,6 +73,7 @@ public class test {
 
         try {
             source.run();
+            Journal.getInstance().print();
         } catch (IllegalAccessException ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {

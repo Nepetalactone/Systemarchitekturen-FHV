@@ -13,6 +13,7 @@ import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
+import test.Journal;
 
 /**
  *
@@ -31,6 +32,8 @@ public class DilateFilter extends Filter{
         0,0,1,1,1,0,0,
         0,0,0,1,0,0,0,
         });
+        
+        Journal.getInstance().setDilateKernel(k);
         
         ParameterBlock pb = new ParameterBlock();
         ErodePackage eroPack = (ErodePackage) data;

@@ -12,6 +12,7 @@ import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import javax.media.jai.JAI;
 import javax.media.jai.PlanarImage;
+import test.Journal;
 
 /**
  *
@@ -30,6 +31,10 @@ public class ThresholdFilter<in,out> extends Filter<in,out>{
         double[] low = new double[]{0,0,0};
         double [] high = new double[]{33,33,33};
         double [] constants = new double[]{255,255,255};
+        
+        Journal.getInstance().setThresholdLow(low);
+        Journal.getInstance().setThresholdHigh(high);
+        Journal.getInstance().setThresholdConstants(constants);
         
         ParameterBlock pb = new ParameterBlock();
         pb.addSource(roiImage.getImg());
