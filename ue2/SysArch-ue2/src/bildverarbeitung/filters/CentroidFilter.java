@@ -5,10 +5,7 @@
 package bildverarbeitung.filters;
 
 import bildverarbeitung.filterObjects.CentroidPackage;
-import bildverarbeitung.filterObjects.DilatePackage;
-import bildverarbeitung.filterObjects.ROI2Package;
 import bildverarbeitung.filterObjects.ROIPackage;
-import darstellung.Painter;
 import filter.Filter;
 import java.awt.Color;
 import java.awt.Point;
@@ -66,7 +63,6 @@ public class CentroidFilter extends Filter{
         if(img instanceof BufferedImage){
             return (BufferedImage) img;
         }
-        
         
         ColorModel cm = img.getColorModel();
         int width = img.getWidth();

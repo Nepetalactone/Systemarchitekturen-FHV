@@ -6,7 +6,6 @@ package bildverarbeitung.filterObjects;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import javax.media.jai.PlanarImage;
 
 /**
  *

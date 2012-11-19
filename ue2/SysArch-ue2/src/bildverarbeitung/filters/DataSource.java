@@ -17,17 +17,16 @@ import javax.imageio.ImageIO;
  *
  * @author Tobias
  */
-public class DataSource<in,out> extends ActiveFilter<in,out> {
+public class DataSource<in, out> extends ActiveFilter<in, out> {
 
     public DataSource() {
-        
     }
-    
-    public BufferedImage getImage(String path){
+
+    public BufferedImage getImage(String path) {
         BufferedImage img = null;
-        try{
+        try {
             img = ImageIO.read(new File(path));
-        }catch(IOException e){
+        } catch (IOException e) {
         }
         return img;
     }
@@ -38,19 +37,18 @@ public class DataSource<in,out> extends ActiveFilter<in,out> {
         push(data);
     }
 
-
     @Override
     public boolean filter(in data) {
-        BufferedImage buffer = getImage((String)data);
-        
-        if(buffer != null){
+        BufferedImage buffer = getImage((String) data);
+
+        if (buffer != null) {
             //0, 50, 447, 55
             RawPackage ri = new RawPackage(buffer);
             super.result = (out) ri;
-            
-            Painter p = new Painter("Source",ri);
-            
-            
+
+            Painter p = new Painter("Source", ri);
+
+
             return true;
         }
         return false;

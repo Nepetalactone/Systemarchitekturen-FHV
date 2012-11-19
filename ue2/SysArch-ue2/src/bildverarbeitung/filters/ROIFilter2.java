@@ -5,7 +5,6 @@
 package bildverarbeitung.filters;
 
 import bildverarbeitung.filterObjects.DilatePackage;
-import bildverarbeitung.filterObjects.ROI2Package;
 import bildverarbeitung.filterObjects.ROIPackage;
 import darstellung.Painter;
 import filter.Filter;
@@ -14,14 +13,12 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
-import java.awt.image.renderable.ParameterBlock;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.jai.PlanarImage;
 import pipe.IPipe;
-import pipe.Pipe;
 import test.Journal;
 
 /**
@@ -42,9 +39,9 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
             new Rectangle(300, 10, 60, 57),
             new Rectangle(360, 10, 60, 57)
         };
-        
+
         Journal.getInstance().setRoi2Rectangles(rects);
-        
+
         ROIFilter filter;
         for (Rectangle rect : rects) {
             RenderedImage img = (RenderedImage) rp.getImage();
@@ -52,11 +49,12 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
 
             image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(rect, image.getColorModel()));
             ROIPackage roiImage = new ROIPackage(image, convertRenderedImage(rp.getImage()), rect, false);
-            
-            Painter p = new Painter("ROIFilter",roiImage);
-            
+
+            Painter p = new Painter("ROIFilter", roiImage);
+
             result = (out) roiImage;
-            for (IPipe pipe : outputPipes){
+
+            for (IPipe pipe : outputPipes) {
                 try {
                     pipe.push(result);
                 } catch (IllegalAccessException ex) {
@@ -75,27 +73,27 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
             }
         }
 
-        return true;
+        return false;
     }
-    
+
     public BufferedImage convertRenderedImage(RenderedImage img) {
-		if (img instanceof BufferedImage) {
-			return (BufferedImage)img;	
-		}	
-		ColorModel cm = img.getColorModel();
-		int width = img.getWidth();
-		int height = img.getHeight();
-		WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
-		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-		Hashtable properties = new Hashtable();
-		String[] keys = img.getPropertyNames();
-		if (keys!=null) {
-			for (int i = 0; i < keys.length; i++) {
-				properties.put(keys[i], img.getProperty(keys[i]));
-			}
-		}
-		BufferedImage result = new BufferedImage(cm, raster, isAlphaPremultiplied, properties);
-		img.copyData(raster);
-		return result;
-	}
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+        ColorModel cm = img.getColorModel();
+        int width = img.getWidth();
+        int height = img.getHeight();
+        WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        Hashtable properties = new Hashtable();
+        String[] keys = img.getPropertyNames();
+        if (keys != null) {
+            for (int i = 0; i < keys.length; i++) {
+                properties.put(keys[i], img.getProperty(keys[i]));
+            }
+        }
+        BufferedImage result = new BufferedImage(cm, raster, isAlphaPremultiplied, properties);
+        img.copyData(raster);
+        return result;
+    }
 }

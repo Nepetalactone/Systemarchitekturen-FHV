@@ -4,7 +4,6 @@
  */
 package bildverarbeitung.pipes;
 
-import filter.IFilter;
 import pipe.Pipe;
 
 /**

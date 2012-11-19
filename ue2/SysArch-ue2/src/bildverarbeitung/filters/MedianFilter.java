@@ -8,12 +8,9 @@ import bildverarbeitung.filterObjects.MedianPackage;
 import bildverarbeitung.filterObjects.ThreshPackage;
 import darstellung.Painter;
 import filter.Filter;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import javax.media.jai.JAI;
-import javax.media.jai.PlanarImage;
-import javax.media.jai.RenderedOp;
 import javax.media.jai.operator.MedianFilterDescriptor;
 
 /**

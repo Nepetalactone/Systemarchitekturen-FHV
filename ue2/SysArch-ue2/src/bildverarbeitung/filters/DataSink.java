@@ -21,5 +21,4 @@ public class DataSink<in,out> extends Filter<in,out>{
         Journal.getInstance().setSinkCount(count);
         return true;
     }
-    
 }

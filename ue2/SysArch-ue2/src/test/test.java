@@ -9,7 +9,6 @@ import bildverarbeitung.filters.*;
 import bildverarbeitung.pipes.ImagePipe;
 import java.awt.Rectangle;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

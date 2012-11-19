@@ -11,7 +11,6 @@ import filter.Filter;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import javax.media.jai.JAI;
-import javax.media.jai.PlanarImage;
 import test.Journal;
 
 /**
