@@ -4,7 +4,7 @@
  */
 package bildverarbeitung.pipes;
 
-import pipe.Pipe;
+import framework.pipe.Pipe;
 
 /**
  *

@@ -45,4 +45,9 @@ public class MedianPackage implements IImagePackage {
     public void setOriginal(BufferedImage original) {
         this.original = original;
     }
+
+	@Override
+	public void setImage(RenderedImage img) {
+		this.renderedImage = img;	
+	}
 }

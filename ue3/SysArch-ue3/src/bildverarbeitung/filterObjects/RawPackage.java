@@ -36,4 +36,16 @@ public class RawPackage implements IImagePackage {
     public BufferedImage getOriginal() {
         return this.img;
     }
+
+
+	@Override
+	public void setImage(RenderedImage img) {
+		this.img = (BufferedImage) img;
+	}
+
+
+	@Override
+	public void setOriginal(BufferedImage img) {
+		this.img = img;
+	}
 }

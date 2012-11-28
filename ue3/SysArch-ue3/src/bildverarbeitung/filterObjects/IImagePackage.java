@@ -15,4 +15,6 @@ public interface IImagePackage {
     
     RenderedImage getImage();
     BufferedImage getOriginal();
+    void setImage(RenderedImage img);
+    void setOriginal(BufferedImage img);
 }
