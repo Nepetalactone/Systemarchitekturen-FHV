@@ -65,5 +65,10 @@ public class ROIPackage implements IImagePackage  {
     public void setShowRectangle(boolean showRectangle) {
         this.showRectangle = showRectangle;
     }
+
+    @Override
+    public void setImage(RenderedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

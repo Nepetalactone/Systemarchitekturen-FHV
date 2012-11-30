@@ -30,6 +30,16 @@ public class ErodePackage implements IImagePackage{
         this.original = original;
         this.image = image;
     }
+
+    @Override
+    public void setImage(RenderedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setOriginal(BufferedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     
 }

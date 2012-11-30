@@ -30,5 +30,15 @@ public class DilatePackage implements IImagePackage{
     public BufferedImage getOriginal() {
         return original;
     }
+
+    @Override
+    public void setImage(RenderedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setOriginal(BufferedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
