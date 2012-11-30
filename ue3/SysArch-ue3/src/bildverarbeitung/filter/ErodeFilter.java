@@ -17,10 +17,10 @@ import javax.media.jai.KernelJAI;
  * @author Tobias
  */
 public class ErodeFilter extends Filter {
-	
-	public ErodeFilter(){
-		super();
-	}
+
+    public ErodeFilter() {
+        super();
+    }
 
     @Override
     public boolean filter(Object data) {

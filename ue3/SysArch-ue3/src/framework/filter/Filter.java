@@ -6,9 +6,10 @@ import java.util.Collection;
 
 import framework.pipe.IPipe;
 import framework.pipe.Pipe;
+import java.io.Serializable;
 
 
-public abstract class Filter<in,out> implements IFilter<in, out>{
+public abstract class Filter<in,out> implements IFilter<in, out> {
 	protected Collection<IPipe> inputPipes;
 	protected Collection<IPipe> outputPipes;
 	protected Collection<in> buffer;
