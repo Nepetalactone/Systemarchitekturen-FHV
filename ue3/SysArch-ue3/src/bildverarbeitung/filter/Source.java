@@ -5,12 +5,11 @@
 package bildverarbeitung.filter;
 
 import bildverarbeitung.filterObjects.RawPackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -50,7 +49,7 @@ public class Source extends DataSource {
         JFileChooser chooser = new JFileChooser();
     	chooser.setFileFilter(new FileFilter() {
             public boolean accept(File f) {
-                String ext = getExtension(f);
+                String ext = ImageFileHelper.getExtension(f);
                 if(f.isDirectory()){
                     return true;
                 }else if(ext != null){
@@ -69,7 +68,7 @@ public class Source extends DataSource {
         chooser.showOpenDialog(frame);
         
         File f = chooser.getSelectedFile();
-        while(!extensions.contains(getExtension(f))){
+        while(!extensions.contains(ImageFileHelper.getExtension(f))){
             String errorMsg = "Valid file extensions are: ";
             for(String s: extensions){
                 errorMsg = errorMsg + s + " ";
@@ -79,18 +78,8 @@ public class Source extends DataSource {
             f = chooser.getSelectedFile();
         }
         
-        b = (BufferedImage) ImageIO.read(f);
+        b = (BufferedImage) ImageFileHelper.loadImageFromFile(f);
         return new RawPackage(b);
     }
     
-    public static String getExtension(File f) {
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
- 
-        if (i > 0 &&  i < s.length() - 1) {
-            ext = s.substring(i+1).toLowerCase();
-        }
-        return ext;
-    }
 }

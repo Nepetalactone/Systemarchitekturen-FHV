@@ -27,6 +27,7 @@ public abstract class DataSource<T>{
 	private void initCollections(){
             outputPipes = new ArrayList<IPipe>();
         }
+        
 	public void run() throws Exception{
 		data = readSource();
 		if(data == null){
