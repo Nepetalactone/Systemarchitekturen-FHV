@@ -13,17 +13,33 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Tobias
  */
-public class CentroidFilter extends Filter{
+public class CentroidFilter extends Filter implements Serializable, PropertyChangeListener{
 	
+        private PropertyChangeSupport change = new PropertyChangeSupport(this);
+        
+        private ROIPackage deepCopy;
+    
 	public CentroidFilter(){
 		super();
 	}
+        
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            System.out.println("yeah");
+        }
 
     @Override
     public boolean filter(Object data) {
@@ -34,6 +50,21 @@ public class CentroidFilter extends Filter{
         
         CentroidPackage centPack = new CentroidPackage(dilPack.getOriginal(),dilPack.getImage(),center);
         result = centPack;
+        try {
+            push(result);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
         
     }
@@ -84,6 +115,16 @@ public class CentroidFilter extends Filter{
         return result;
     }
     
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
     
-    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
