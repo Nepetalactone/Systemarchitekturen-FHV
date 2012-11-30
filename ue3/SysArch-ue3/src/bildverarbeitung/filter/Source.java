@@ -10,6 +10,8 @@ import framework.endpoint.DataSource;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -78,8 +80,16 @@ public class Source extends DataSource {
             f = chooser.getSelectedFile();
         }
         
-        b = (BufferedImage) ImageFileHelper.loadImageFromFile(f);
         return new RawPackage(b);
+    }
+    
+    public static void main(String[] args){
+        Source s = new Source();
+        try {
+            s.run();
+        } catch (Exception ex) {
+            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
