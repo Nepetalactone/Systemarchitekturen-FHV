@@ -38,4 +38,14 @@ public class CentroidPackage implements IImagePackage{
     public Point getCenter(){
         return center;
     }
+
+    @Override
+    public void setImage(RenderedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setOriginal(BufferedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

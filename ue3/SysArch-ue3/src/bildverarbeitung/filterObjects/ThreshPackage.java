@@ -37,6 +37,16 @@ public class ThreshPackage  implements IImagePackage {
     public boolean isShowOriginal() {
         return showOriginal;
     }
+
+    @Override
+    public void setImage(RenderedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setOriginal(BufferedImage img) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     
 }
