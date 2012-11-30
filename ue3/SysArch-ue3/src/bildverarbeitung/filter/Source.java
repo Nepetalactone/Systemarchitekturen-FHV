@@ -4,7 +4,9 @@
  */
 package bildverarbeitung.filter;
 
+import bildverarbeitung.filterObjects.RawPackage;
 import framework.endpoint.DataSource;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,7 +21,7 @@ import javax.swing.filechooser.FileFilter;
  *
  * @author Tobias
  */
-public class Source<BufferedImage> extends DataSource<BufferedImage> {
+public class Source extends DataSource {
 
     private final String[] ext = new String[]{"jpeg","jpg","png","bmp"};
     private ArrayList<String> extensions;
@@ -31,7 +33,7 @@ public class Source<BufferedImage> extends DataSource<BufferedImage> {
     }
     
     public Source(boolean isActive){
-        super.isActive = isActive;
+        super(isActive);
         initExtensionList();
         
     }
@@ -44,7 +46,7 @@ public class Source<BufferedImage> extends DataSource<BufferedImage> {
     }
 
     @Override
-    public BufferedImage readSource() throws Exception {
+    public RawPackage readSource() throws Exception {
         JFileChooser chooser = new JFileChooser();
     	chooser.setFileFilter(new FileFilter() {
             public boolean accept(File f) {
@@ -78,17 +80,7 @@ public class Source<BufferedImage> extends DataSource<BufferedImage> {
         }
         
         b = (BufferedImage) ImageIO.read(f);
-        return b;
-    }
-    
-    
-    public static void main(String[]args){
-        Source s = new Source();
-        try {
-            s.run();
-        } catch (Exception ex) {
-            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        return new RawPackage(b);
     }
     
     public static String getExtension(File f) {

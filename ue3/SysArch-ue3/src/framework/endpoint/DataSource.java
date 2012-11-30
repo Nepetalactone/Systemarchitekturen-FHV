@@ -3,6 +3,7 @@ package framework.endpoint;
 import java.util.Collection;
 
 import framework.pipe.IPipe;
+import java.util.ArrayList;
 
 public abstract class DataSource<T>{
 	
@@ -15,14 +16,17 @@ public abstract class DataSource<T>{
 	
 	
         public DataSource(){
-            
+            initCollections();
         }
         
 	public DataSource(boolean isActive){
 		this.isActive = isActive;
+                initCollections();
 	}
 	
-	
+	private void initCollections(){
+            outputPipes = new ArrayList<IPipe>();
+        }
 	public void run() throws Exception{
 		data = readSource();
 		if(data == null){

@@ -3,6 +3,7 @@ package framework.endpoint;
 import java.util.Collection;
 
 import framework.pipe.IPipe;
+import java.util.ArrayList;
 
 public abstract class DataSink<T>{
 	
@@ -14,17 +15,26 @@ public abstract class DataSink<T>{
 	protected Collection<T> finishedObjects;
 	
 	
+        public DataSink(){
+            initCollections();
+            
+        }
 	public DataSink(boolean isActive){
 		this.isActive = isActive;
+                initCollections();
 	}
 	
-	
+	private void initCollections(){
+            this.inputPipes = new ArrayList<IPipe>();
+            this.finishedObjects = new ArrayList<T>();
+        }
 	public void run() throws Exception{
 		if(isActive){
 			for(IPipe p: inputPipes){
 				T temp = (T) p.pull();
 				if(temp != null){
-					finishedObjects.add(temp);
+                                    finishedObjects.add(temp);
+                                    saveData(temp);
 				}
 			}
 		}
@@ -34,7 +44,7 @@ public abstract class DataSink<T>{
 	public abstract void saveData(T data);
 	
 	
-	public void push(T data){
+	public void push(T data) {
 		finishedObjects.add(data);
 		saveData(data);
 	}

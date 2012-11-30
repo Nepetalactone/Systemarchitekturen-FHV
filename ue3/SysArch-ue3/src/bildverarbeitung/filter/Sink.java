@@ -4,32 +4,29 @@
  */
 package bildverarbeitung.filter;
 
-import framework.filter.Filter;
+import framework.endpoint.DataSink;
+import bildverarbeitung.filterObjects.IImagePackage;
 
 /**
  *
  * @author Tobias
  */
-public class Sink<in,out> extends Filter<in,out>{
+public class Sink extends DataSink{
     
-    int count = 0;
     
     public Sink(){
     	super();
     }
-    
-    @Override
-    public boolean filter(in data) {
-        count++;
-        return true;
+    public Sink(boolean isActive){
+        super(isActive);
     }
 
-	public int getCount() {
-		return count;
-	}
+    @Override
+    public void saveData(Object data) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+
     
 }
