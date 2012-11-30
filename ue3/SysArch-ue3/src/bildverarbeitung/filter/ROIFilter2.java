@@ -24,7 +24,12 @@ import framework.pipe.IPipe;
  * @author Tobias
  */
 public class ROIFilter2<in, out> extends Filter<in, out> {
-	
+
+       
+    public ROIFilter2() {
+        super();
+    }
+       
     @Override
     public boolean filter(in data) {
         DilatePackage rp = (DilatePackage) data;
@@ -90,10 +95,6 @@ public class ROIFilter2<in, out> extends Filter<in, out> {
         img.copyData(raster);
         return result;
     }
-    
-	public ROIFilter2(){
-		super();
-	}
-	
-	
+
+ 
 }

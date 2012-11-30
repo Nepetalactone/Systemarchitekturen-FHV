@@ -19,9 +19,17 @@ import javax.media.jai.PlanarImage;
 public class ROIFilter<in, out> extends Filter<in, out> {
 
     private Rectangle roi;
-    
-    public ROIFilter(){
-    	super();
+
+    public Rectangle getRoi() {
+        return roi;
+    }
+
+    public void setRoi(Rectangle roi) {
+        this.roi = roi;
+    }
+
+    public ROIFilter() {
+        super();
     }
 
     public ROIFilter(Rectangle roi) {
@@ -40,14 +48,4 @@ public class ROIFilter<in, out> extends Filter<in, out> {
 
         return true;
     }
-
-	public Rectangle getRoi() {
-		return roi;
-	}
-
-	public void setRoi(Rectangle roi) {
-		this.roi = roi;
-	}
-    
-    
 }

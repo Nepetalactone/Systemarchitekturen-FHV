@@ -18,10 +18,10 @@ import javax.media.jai.KernelJAI;
  */
 public class DilateFilter extends Filter {
 
-	public DilateFilter(){
-		super();
-	}
-	
+    public DilateFilter() {
+        super();
+    }
+
     @Override
     public boolean filter(Object data) {
         KernelJAI k = new KernelJAI(7, 7, new float[]{

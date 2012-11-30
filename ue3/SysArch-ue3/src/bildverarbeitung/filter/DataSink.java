@@ -12,10 +12,18 @@ import framework.filter.Filter;
  */
 public class DataSink<in,out> extends Filter<in,out>{
     
-    int count = 0;
+    private int count = 0;
     
     public DataSink(){
     	super();
+    }
+    
+    public int getCount () {
+        return this.count;
+    }
+    
+    public void setCount(int count) {
+        this.count = count;
     }
     
     @Override
@@ -23,13 +31,5 @@ public class DataSink<in,out> extends Filter<in,out>{
         count++;
         return true;
     }
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
     
 }
