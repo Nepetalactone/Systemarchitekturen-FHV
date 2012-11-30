@@ -10,11 +10,11 @@ import framework.filter.Filter;
  *
  * @author Tobias
  */
-public class DataSink<in,out> extends Filter<in,out>{
+public class Sink<in,out> extends Filter<in,out>{
     
     int count = 0;
     
-    public DataSink(){
+    public Sink(){
     	super();
     }
     

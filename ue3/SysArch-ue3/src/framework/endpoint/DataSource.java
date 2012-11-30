@@ -14,6 +14,10 @@ public abstract class DataSource<T>{
 	protected T data;
 	
 	
+        public DataSource(){
+            
+        }
+        
 	public DataSource(boolean isActive){
 		this.isActive = isActive;
 	}
@@ -21,7 +25,10 @@ public abstract class DataSource<T>{
 	
 	public void run() throws Exception{
 		data = readSource();
-		if(isActive){
+		if(data == null){
+                    throw new Exception("Could not load File");
+                }
+                if(isActive){
 			for(IPipe p: outputPipes){
 				p.push(data);
 			}
