@@ -1,12 +1,9 @@
 package framework.filter;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import framework.pipe.IPipe;
-import framework.pipe.Pipe;
-import java.io.Serializable;
 
 
 public abstract class Filter<in,out> implements IFilter<in, out> {
@@ -45,7 +42,7 @@ public abstract class Filter<in,out> implements IFilter<in, out> {
 	 * Gibt eine Deepcopy an die output Pipes weiter
 	 */
 	@Override
-	public void push(in data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
+	public void push(in data) throws Exception {
 		if(filter(data)){
 			for(IPipe p: outputPipes){
 				//make deep copy
@@ -58,7 +55,7 @@ public abstract class Filter<in,out> implements IFilter<in, out> {
 	 * Holt Text von Pipe in den Filter
 	 */
 	@Override
-	public out pull(){
+	public out pull() throws Exception {
 		out data = result;
 		if(data == null){
 			for(IPipe p: inputPipes){
@@ -79,5 +76,5 @@ public abstract class Filter<in,out> implements IFilter<in, out> {
 //	}
 	
     @Override
-    public abstract boolean filter(in data);
+    public abstract boolean filter(in data) throws Exception;
 }

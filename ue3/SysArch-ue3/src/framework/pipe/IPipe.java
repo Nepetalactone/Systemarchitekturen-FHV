@@ -7,8 +7,8 @@ import framework.filter.IFilter;
 
 
 public interface IPipe<T> {
-	void push(T data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException;
-	T pull();
+	void push(T data) throws Exception;
+	T pull()throws Exception;
 	
 	void addOutputFilter(IFilter filter);
 	void addInputFilter(IFilter filter);

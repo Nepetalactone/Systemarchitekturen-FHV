@@ -20,7 +20,7 @@ public abstract class ActiveFilter<in,out> extends Filter<in, out> {
 		this.notEndOfStream = notEndOfStream;
 	}
 
-	public void run() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
+	public void run() throws Exception{
 		in data = null;
 		while(notEndOfStream){
 			for(IPipe inPipe: inputPipes){

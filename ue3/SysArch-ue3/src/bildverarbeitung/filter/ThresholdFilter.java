@@ -32,7 +32,7 @@ public class ThresholdFilter<in, out> extends Filter<in, out> {
         double[] constants = new double[]{255, 255, 255};
 
         ParameterBlock pb = new ParameterBlock();
-        pb.addSource(roiImage.getImg());
+        pb.addSource(roiImage.getImage());
         pb.add(low);
         pb.add(high);
         pb.add(constants);

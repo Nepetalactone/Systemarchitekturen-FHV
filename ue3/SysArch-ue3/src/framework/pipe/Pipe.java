@@ -19,7 +19,7 @@ public class Pipe<T> implements IPipe<T> {
 	/**
 	 * Gibt Daten an die Output Filter weiter
 	 */
-	public void push(T data) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException{
+	public void push(T data) throws Exception{
 		for (IFilter outputFilter : outputFilters) {
 			outputFilter.push(data);
 		}
@@ -28,7 +28,7 @@ public class Pipe<T> implements IPipe<T> {
 	/**
 	 * Holt Daten vom Input Filter in die Pipe
 	 */
-	public T pull() {
+	public T pull() throws Exception {
 		T data = null;
 		for(IFilter f : inputFilters){
 			data = (T) f.pull();

@@ -16,38 +16,21 @@ import javax.media.jai.PlanarImage;
 public class ROIPackage implements IImagePackage  {
     
     
-    private PlanarImage img;
+    private PlanarImage image;
     private BufferedImage original;
     private Rectangle rectangle;
     private boolean showRectangle;
 
+    
+    public ROIPackage(){
+        
+    }
+    
     public ROIPackage(PlanarImage img, BufferedImage original, Rectangle rectangle, boolean showRectangle) {
-        this.img = img;
+        this.image = img;
         this.original = original;
         this.rectangle = rectangle;
         this.showRectangle = showRectangle;
-    }
-
-
-    public PlanarImage getImg() {
-        return img;
-    }
-
-    public void setImg(PlanarImage img) {
-        this.img = img;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
-
-    @Override
-    public RenderedImage getImage() {
-        return img;
     }
 
     public BufferedImage getOriginal() {
@@ -56,6 +39,14 @@ public class ROIPackage implements IImagePackage  {
 
     public void setOriginal(BufferedImage original) {
         this.original = original;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     public boolean isShowRectangle() {
@@ -67,8 +58,13 @@ public class ROIPackage implements IImagePackage  {
     }
 
     @Override
+    public RenderedImage getImage() {
+        return this.image;
+    }
+
+    @Override
     public void setImage(RenderedImage img) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.image = (PlanarImage) img;
     }
     
 }
