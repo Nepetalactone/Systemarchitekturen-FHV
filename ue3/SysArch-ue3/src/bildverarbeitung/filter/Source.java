@@ -8,14 +8,16 @@ import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,7 +27,7 @@ import javax.swing.filechooser.FileFilter;
  *
  * @author Tobias
  */
-public class Source extends DataSource implements PropertyChangeListener{
+public class Source extends DataSource implements MouseListener{
 
     private PropertyChangeSupport change;
     
@@ -104,27 +106,42 @@ public class Source extends DataSource implements PropertyChangeListener{
     
 //    public static void main(String[] args){
 //        Source s = new Source();
-//       try {
-//           s.run();
+//        try {
+//            s.run();
 //        } catch (Exception ex) {
 //            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
 
-    public void addPropertyChangeListener(PropertyChangeListener l){
-        change.addPropertyChangeListener(l);
+    public void addMouseListener(MouseListener l){
     }
     
-    public void removePropertyChangeListener(PropertyChangeListener l){
-        change.removePropertyChangeListener(l);
+    public void removeMouseListener(MouseListener l){
     }
     
-    public void actionPerformed(java.awt.event.ActionEvent evt){
-            System.out.println("yeah");
-    }
-    
+
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void mouseClicked(MouseEvent e) {
+        try {
+            run();
+        } catch (Exception ex) {
+            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
