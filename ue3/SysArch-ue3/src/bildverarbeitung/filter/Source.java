@@ -121,14 +121,7 @@ public class Source extends DataSource implements PropertyChangeListener, Action
 //    }
 
     
-    public void setIsActive(boolean isAcvtive){
-        boolean old = super.isActive();
-        super.setActive(active);
-        change.firePropertyChange("isActive",old,active);
-    }
-    public boolean isIsActive(){
-        return super.isActive();
-    }
+
     
     public void addActionListener(ActionListener l){
     }
