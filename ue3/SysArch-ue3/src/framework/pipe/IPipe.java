@@ -1,12 +1,11 @@
 package framework.pipe;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
 
 import framework.filter.IFilter;
+import java.io.Serializable;
 
 
-public interface IPipe<T> {
+public interface IPipe<T> extends Serializable{
 	void push(T data) throws Exception;
 	T pull()throws Exception;
 	

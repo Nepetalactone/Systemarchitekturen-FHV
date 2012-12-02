@@ -11,6 +11,9 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.RenderedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -18,7 +21,9 @@ import javax.swing.JFrame;
  *
  * @author green
  */
-public class Painter extends JFrame {
+public class Painter extends JFrame  implements PropertyChangeListener {
+    
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
     
     private class PainterCanvas extends JComponent {
         private IImagePackage imgPack;
@@ -81,5 +86,18 @@ public class Painter extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(new PainterCanvas(imgPack));
         setVisible(true);
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

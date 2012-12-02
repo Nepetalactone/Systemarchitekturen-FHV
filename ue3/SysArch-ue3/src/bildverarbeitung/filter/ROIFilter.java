@@ -10,14 +10,19 @@ import framework.filter.Filter;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.media.jai.PlanarImage;
 
 /**
  *
  * @author Tobias
  */
-public class ROIFilter<in, out> extends Filter<in, out> {
+public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
 
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    
     private Rectangle roi;
 
     public Rectangle getRoi() {
@@ -47,5 +52,18 @@ public class ROIFilter<in, out> extends Filter<in, out> {
         result = (out) roiImage;
 
         return true;
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

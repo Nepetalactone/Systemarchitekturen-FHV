@@ -9,11 +9,13 @@ import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,19 +25,23 @@ import javax.swing.filechooser.FileFilter;
  *
  * @author Tobias
  */
-public class Source extends DataSource {
+public class Source extends DataSource implements PropertyChangeListener{
 
+    private PropertyChangeSupport change;
+    
     private final String[] ext = new String[]{"jpeg","jpg","png","bmp"};
     private ArrayList<String> extensions;
     
     
     public Source() {
     	super();
+        change = new PropertyChangeSupport(this);
         initExtensionList();
     }
     
     public Source(boolean isActive){
         super(isActive);
+        change = new PropertyChangeSupport(this);
         initExtensionList();
         
     }
@@ -96,13 +102,29 @@ public class Source extends DataSource {
         return new RawPackage(b);
     }
     
-    public static void main(String[] args){
-        Source s = new Source();
-        try {
-            s.run();
-        } catch (Exception ex) {
-            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//    public static void main(String[] args){
+//        Source s = new Source();
+//       try {
+//           s.run();
+//        } catch (Exception ex) {
+//            Logger.getLogger(Source.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
     }
     
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+    
+    public void actionPerformed(java.awt.event.ActionEvent evt){
+            System.out.println("yeah");
+    }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

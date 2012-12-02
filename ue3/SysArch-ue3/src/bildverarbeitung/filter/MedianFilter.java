@@ -9,6 +9,9 @@ import bildverarbeitung.filterObjects.ThreshPackage;
 import framework.filter.Filter;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.media.jai.JAI;
 import javax.media.jai.operator.MedianFilterDescriptor;
 
@@ -16,8 +19,10 @@ import javax.media.jai.operator.MedianFilterDescriptor;
  *
  * @author Tobias
  */
-public class MedianFilter<in, out> extends Filter<in, out> {
+public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
 
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    
     public MedianFilter() {
         super();
     }
@@ -38,5 +43,18 @@ public class MedianFilter<in, out> extends Filter<in, out> {
 
         result = (out) medianPack;
         return true;
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

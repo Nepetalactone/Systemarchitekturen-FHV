@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import framework.pipe.IPipe;
+import java.io.Serializable;
 
 
 public abstract class Filter<in,out> implements IFilter<in, out> {

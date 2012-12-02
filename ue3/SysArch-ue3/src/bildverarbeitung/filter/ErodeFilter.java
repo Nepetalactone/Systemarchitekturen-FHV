@@ -9,6 +9,9 @@ import bildverarbeitung.filterObjects.MedianPackage;
 import framework.filter.Filter;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
 
@@ -16,8 +19,10 @@ import javax.media.jai.KernelJAI;
  *
  * @author Tobias
  */
-public class ErodeFilter extends Filter {
+public class ErodeFilter extends Filter  implements PropertyChangeListener {
 
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    
     public ErodeFilter() {
         super();
     }
@@ -49,5 +54,18 @@ public class ErodeFilter extends Filter {
         result = eroPack;
 
         return true;
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -9,6 +9,9 @@ import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSink;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,8 +22,9 @@ import javax.imageio.ImageIO;
  *
  * @author Tobias
  */
-public class Sink extends DataSink{
+public class Sink extends DataSink implements PropertyChangeListener {
     
+    private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private int i;
     
     public Sink(){
@@ -46,6 +50,17 @@ public class Sink extends DataSink{
     }
     
 
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
+    }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

@@ -3,9 +3,10 @@ package framework.endpoint;
 import java.util.Collection;
 
 import framework.pipe.IPipe;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class DataSink<T>{
+public abstract class DataSink<T> implements Serializable{
 	
 	public static final boolean ACTIVE_SINK = true;
 	public static final boolean PASSIVE_SINK = false;
