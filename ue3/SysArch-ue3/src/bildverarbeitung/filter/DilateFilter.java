@@ -15,6 +15,8 @@ import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
 
@@ -25,7 +27,7 @@ import javax.media.jai.KernelJAI;
 public class DilateFilter extends Filter implements PropertyChangeListener  {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
-    IImagePackage workingCopy;
+    IImagePackage workingCopy = null;
     
     public DilateFilter() {
         super();
@@ -46,8 +48,8 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
         
         ParameterBlock pb = new ParameterBlock();
         IImagePackage imgPackage = (IImagePackage) data;
+        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),imgPackage.getImage());
         BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
-        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),b);
         
         pb.addSource(b);
         pb.add(k);
@@ -68,7 +70,12 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        filter(workingCopy);
-        //push
+        try {
+             if(workingCopy != null){
+                push(workingCopy);
+             }
+        } catch (Exception ex) {
+            Logger.getLogger(DilateFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

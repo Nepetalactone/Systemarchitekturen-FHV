@@ -4,14 +4,20 @@
  */
 package bildverarbeitung.filter;
 
+import bildverarbeitung.filterObjects.DilatePackage;
 import bildverarbeitung.filterObjects.ErodePackage;
+import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.MedianPackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
 
@@ -22,9 +28,11 @@ import javax.media.jai.KernelJAI;
 public class ErodeFilter extends Filter  implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    IImagePackage workingCopy = null;
     
     public ErodeFilter() {
         super();
+        change.addPropertyChangeListener(this);
     }
 
     @Override
@@ -43,13 +51,16 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
                     0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,});
 
         ParameterBlock pb = new ParameterBlock();
-        MedianPackage medPack = (MedianPackage) data;
+        IImagePackage imgPackage = (IImagePackage) data;
+        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),imgPackage.getImage());
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+        
 
-        pb.addSource(medPack.getImage());
+        pb.addSource(b);
         pb.add(k);
 
         RenderedImage img = JAI.create("Erode", pb);
-        ErodePackage eroPack = new ErodePackage(medPack.getOriginal(), img);
+        ErodePackage eroPack = new ErodePackage(imgPackage.getOriginal(), img);
 
         result = eroPack;
 
@@ -66,6 +77,12 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            if(workingCopy != null){
+                push(workingCopy);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ErodeFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

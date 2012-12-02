@@ -5,7 +5,10 @@
 package bildverarbeitung.filter;
 
 import bildverarbeitung.filterObjects.CentroidPackage;
+import bildverarbeitung.filterObjects.DilatePackage;
+import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.ROIPackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
 import java.awt.Color;
 import java.awt.Point;
@@ -18,6 +21,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,11 +31,11 @@ import java.util.Hashtable;
 public class CentroidFilter extends Filter implements Serializable, PropertyChangeListener{
 	
         private PropertyChangeSupport change = new PropertyChangeSupport(this);
+        IImagePackage workingCopy = null;
         
-        private ROIPackage deepCopy;
-    
 	public CentroidFilter(){
 		super();
+                change.addPropertyChangeListener(this);
 	}
         
         public void actionPerformed(java.awt.event.ActionEvent evt){
@@ -39,13 +44,11 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
 
     @Override
     public boolean filter(Object data) {
-        ROIPackage dilPack = (ROIPackage) data;
-        
-        BufferedImage b = convertRenderedImage(dilPack.getImage());
+        IImagePackage imgPackage = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage());
         Point center = getCenter(b);
-        
-        CentroidPackage centPack = new CentroidPackage(dilPack.getOriginal(),dilPack.getImage(),center);
-        result = centPack;
+        this.workingCopy = new CentroidPackage(imgPackage.getOriginal(),b,center);
+        result = workingCopy;
         return true;
         
     }
@@ -73,29 +76,6 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         return new Point(xx,yy);
     }
     
-    private BufferedImage convertRenderedImage(RenderedImage img){
-        if(img instanceof BufferedImage){
-            return (BufferedImage) img;
-        }
-        
-        ColorModel cm = img.getColorModel();
-        int width = img.getWidth();
-        int height = img.getHeight();
-        WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
-        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-        Hashtable properties = new Hashtable();
-        String[] keys = img.getPropertyNames();
-        
-        if(keys != null){
-            for(int i = 0; i < keys.length; i++){
-                properties.put(keys[i], img.getProperty(keys[i]));
-            }
-        }
-        BufferedImage result = new BufferedImage(cm, raster , isAlphaPremultiplied, properties);
-        img.copyData(raster);
-        return result;
-    }
-    
     public void addPropertyChangeListener(PropertyChangeListener l){
         change.addPropertyChangeListener(l);
     }
@@ -106,6 +86,12 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            if(workingCopy != null){
+                push(workingCopy);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -29,7 +29,7 @@ public class Painter extends JComponent implements PropertyChangeListener {
     
     
     public Painter(){
-        
+        change.addPropertyChangeListener(this);
     }
     
     public Painter(String name, IImagePackage imgPack){

@@ -4,14 +4,19 @@
  */
 package bildverarbeitung.filter;
 
+import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.MedianPackage;
 import bildverarbeitung.filterObjects.ThreshPackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.JAI;
 import javax.media.jai.operator.MedianFilterDescriptor;
 
@@ -19,11 +24,12 @@ import javax.media.jai.operator.MedianFilterDescriptor;
  *
  * @author Tobias
  */
-public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
+public class MedianFilter extends Filter  implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private int maskSize;
-
+    private IImagePackage workingCopy = null;
+    
     public int getMaskSize() {
         return maskSize;
     }
@@ -37,23 +43,27 @@ public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyC
     public MedianFilter() {
         super();
         maskSize = 3; //default size
+        change.addPropertyChangeListener(this);
     }
 
     @Override
-    public boolean filter(in data) {
+    public boolean filter(Object data) {
 
 
-        ThreshPackage ti = (ThreshPackage) data;
+        IImagePackage imgPackage = (IImagePackage) data;
+        workingCopy = new MedianPackage(imgPackage.getOriginal(),imgPackage.getImage());
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+
         ParameterBlock pb = new ParameterBlock();
 
-        pb.addSource(ti.getImage());
+        pb.addSource(b);
         pb.add(MedianFilterDescriptor.MEDIAN_MASK_SQUARE);
         pb.add(maskSize);
 
         RenderedImage input = JAI.create("medianfilter", pb, null);
-        MedianPackage medianPack = new MedianPackage(ti.getOriginal(), input);
+        MedianPackage medianPack = new MedianPackage(imgPackage.getOriginal(), input);
 
-        result = (out) medianPack;
+        result = medianPack;
         return true;
     }
     
@@ -67,6 +77,12 @@ public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyC
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            if(workingCopy != null){
+                push(workingCopy);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MedianFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
