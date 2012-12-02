@@ -50,21 +50,6 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         
         CentroidPackage centPack = new CentroidPackage(dilPack.getOriginal(),dilPack.getImage(),center);
         result = centPack;
-        try {
-            push(result);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return true;
         
     }
