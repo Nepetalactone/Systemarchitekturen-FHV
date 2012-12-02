@@ -29,7 +29,9 @@ public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyC
     }
 
     public void setMaskSize(int maskSize) {
+        int oldMaskSize = this.maskSize;
         this.maskSize = maskSize;
+        change.firePropertyChange("maskSize", oldMaskSize, maskSize);
     }
     
     public MedianFilter() {
