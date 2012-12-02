@@ -40,16 +40,14 @@ public class SourceBeanInfo extends SimpleBeanInfo {
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
     private static final int EVENT_actionListener = 0;
-    private static final int EVENT_propertyChangeListener = 1;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[2];
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
     
         try {
             eventSets[EVENT_actionListener] = new EventSetDescriptor ( bildverarbeitung.filter.Source.class, "actionListener", java.awt.event.ActionListener.class, new String[] {"actionPerformed"}, "addActionListener", "removeActionListener" ); // NOI18N
-            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.Source.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
@@ -63,12 +61,11 @@ public class SourceBeanInfo extends SimpleBeanInfo {
     private static final int METHOD_addOutputPipe1 = 1;
     private static final int METHOD_pull2 = 2;
     private static final int METHOD_removeOutputPipe3 = 3;
-    private static final int METHOD_run4 = 4;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[5];
+        MethodDescriptor[] methods = new MethodDescriptor[4];
     
         try {
             methods[METHOD_actionPerformed0] = new MethodDescriptor(bildverarbeitung.filter.Source.class.getMethod("actionPerformed", new Class[] {java.awt.event.ActionEvent.class})); // NOI18N
@@ -79,8 +76,6 @@ public class SourceBeanInfo extends SimpleBeanInfo {
             methods[METHOD_pull2].setDisplayName ( "" );
             methods[METHOD_removeOutputPipe3] = new MethodDescriptor(framework.endpoint.DataSource.class.getMethod("removeOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
             methods[METHOD_removeOutputPipe3].setDisplayName ( "" );
-            methods[METHOD_run4] = new MethodDescriptor(framework.endpoint.DataSource.class.getMethod("run", new Class[] {})); // NOI18N
-            methods[METHOD_run4].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 
