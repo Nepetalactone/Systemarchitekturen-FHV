@@ -87,11 +87,14 @@ public class Source extends DataSource implements PropertyChangeListener, Action
     	});
     }
     
-    private File getChosenFile(JFileChooser chooser){
+    private File getChosenFile(JFileChooser chooser) throws Exception{
         JFrame frame = new JFrame();
         chooser.showOpenDialog(frame);
         
         File f = chooser.getSelectedFile();
+        if(f == null){
+            throw new Exception("Action canceled");
+        }
         while(!extensions.contains(ImageFileHelper.getExtension(f))){
             String errorMsg = "Valid file extensions are: ";
             for(String s: extensions){
