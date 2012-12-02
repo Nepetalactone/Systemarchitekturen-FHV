@@ -4,14 +4,18 @@
  */
 package bildverarbeitung.filter;
 
+import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.ROIPackage;
 import bildverarbeitung.filterObjects.ThreshPackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.JAI;
 
 /**
@@ -24,7 +28,8 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     private int lowValue;
     private int highValue;
     private int constantValue;
-
+    private IImagePackage workingCopy;
+    
     public int getLowValue() {
         return lowValue;
     }
@@ -68,18 +73,18 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
         //0,30,255
         //0,254,0
         //
-        ROIPackage roiImage = (ROIPackage) data;
+        workingCopy = (IImagePackage) data;
         double[] low = new double[]{lowValue, lowValue, lowValue};
         double[] high = new double[]{highValue, highValue, highValue};
         double[] constants = new double[]{constantValue, constantValue, constantValue};
 
         ParameterBlock pb = new ParameterBlock();
-        pb.addSource(roiImage.getImage());
+        pb.addSource(ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage())));
         pb.add(low);
         pb.add(high);
         pb.add(constants);
         RenderedImage thresh = JAI.create("threshold", pb);
-        ThreshPackage threshPack = new ThreshPackage(thresh, roiImage.getOriginal(), false);
+        ThreshPackage threshPack = new ThreshPackage(thresh, workingCopy.getOriginal(), false);
         result = (out) threshPack;
         return true;
 
@@ -95,6 +100,12 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            if (workingCopy != null) {
+                push((in)workingCopy);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ThresholdFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
