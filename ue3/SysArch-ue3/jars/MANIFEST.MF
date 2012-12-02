@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.3
+Created-By: 1.7.0-b147 (Oracle Corporation)
+
+Name: bildverarbeitung.filter.CentroidFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.DilateFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.ErodeFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.MedianFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.Painter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.ROIFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.Sink.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.Source.class
+Java-Bean: True
+
+Name: bildverarbeitung.filter.ThresholdFilter.class
+Java-Bean: True
+
+Name: bildverarbeitung.pipe.ImagePipe.class
+Java-Bean: True
