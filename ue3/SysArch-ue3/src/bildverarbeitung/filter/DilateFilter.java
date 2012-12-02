@@ -6,7 +6,10 @@ package bildverarbeitung.filter;
 
 import bildverarbeitung.filterObjects.DilatePackage;
 import bildverarbeitung.filterObjects.ErodePackage;
+import bildverarbeitung.filterObjects.IImagePackage;
+import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
@@ -22,9 +25,11 @@ import javax.media.jai.KernelJAI;
 public class DilateFilter extends Filter implements PropertyChangeListener  {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    IImagePackage workingCopy;
     
     public DilateFilter() {
         super();
+        change.addPropertyChangeListener(this);
     }
 
     @Override
@@ -38,14 +43,17 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
                     0, 0, 1, 1, 1, 0, 0,
                     0, 0, 0, 1, 0, 0, 0,});
 
+        
         ParameterBlock pb = new ParameterBlock();
-        ErodePackage eroPack = (ErodePackage) data;
-
-        pb.addSource(eroPack.getImage());
+        IImagePackage imgPackage = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),b);
+        
+        pb.addSource(b);
         pb.add(k);
 
         RenderedImage img = JAI.create("Dilate", pb);
-        DilatePackage dilPack = new DilatePackage(eroPack.getOriginal(), img);
+        DilatePackage dilPack = new DilatePackage(imgPackage.getOriginal(), img);
         result = dilPack;
         return true;
     }
@@ -60,6 +68,7 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        filter(workingCopy);
+        //push
     }
 }
