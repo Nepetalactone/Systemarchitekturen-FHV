@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class ImagePipe extends Pipe implements ActionListener,PropertyChangeListener{
 
     private PropertyChangeSupport change;
-    
+     
     public ImagePipe(){
         super();
         change = new PropertyChangeSupport(this);

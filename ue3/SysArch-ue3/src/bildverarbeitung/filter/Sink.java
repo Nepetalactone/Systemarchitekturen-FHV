@@ -50,6 +50,16 @@ public class Sink extends DataSink implements PropertyChangeListener {
     }
     
 
+    public void setIsActive(boolean isAcvtive){
+        boolean old = super.isIsActive();
+        super.setIsActive(isActive);
+        change.firePropertyChange("isActive",old,isActive);
+    }
+    public boolean isIsActive(){
+        return super.isIsActive();
+    }
+    
+    
     public void addPropertyChangeListener(PropertyChangeListener l){
         change.addPropertyChangeListener(l);
     }

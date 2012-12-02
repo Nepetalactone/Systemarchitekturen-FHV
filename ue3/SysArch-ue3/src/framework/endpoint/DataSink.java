@@ -56,4 +56,13 @@ public abstract class DataSink<T> implements Serializable{
 	public void removeInputPipe(IPipe pipe){
 		this.inputPipes.remove(pipe);
 	}
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+        
 }

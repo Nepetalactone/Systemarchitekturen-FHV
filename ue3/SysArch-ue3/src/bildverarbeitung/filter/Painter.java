@@ -111,6 +111,8 @@ public class Painter extends JComponent  implements PropertyChangeListener {
     }
 
     public void setImgPack(IImagePackage imgPack) {
+        IImagePackage old = this.imgPack;
         this.imgPack = imgPack;
+        change.firePropertyChange("ImagePackage",old,imgPack);
     }
 }

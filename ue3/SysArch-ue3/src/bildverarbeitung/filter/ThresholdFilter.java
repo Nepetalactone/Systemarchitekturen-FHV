@@ -30,7 +30,9 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     }
 
     public void setLowValue(int lowValue) {
+        int old = this.lowValue;
         this.lowValue = lowValue;
+        change.firePropertyChange("width",old,lowValue);
     }
 
     public int getHighValue() {
@@ -38,7 +40,9 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     }
 
     public void setHighValue(int highValue) {
+        int old = this.highValue;
         this.highValue = highValue;
+        change.firePropertyChange("width",old,highValue);
     }
 
     public int getConstantValue() {
@@ -46,7 +50,9 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     }
 
     public void setConstantValue(int constantValue) {
+        int old = this.constantValue;
         this.constantValue = constantValue;
+        change.firePropertyChange("width",old,constantValue);
     }
     
     public ThresholdFilter() {

@@ -30,7 +30,9 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
     }
 
     public void setHeight(int height) {
+        int old = this.height;
         this.height = height;
+        change.firePropertyChange("width",old,height);
     }
 
     public int getWidth() {
@@ -38,7 +40,9 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
     }
 
     public void setWidth(int width) {
+        int old = this.width;
         this.width = width;
+        change.firePropertyChange("width",old,width);
     }
     
     public ROIFilter() {
