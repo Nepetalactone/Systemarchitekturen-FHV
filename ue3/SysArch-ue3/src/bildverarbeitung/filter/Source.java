@@ -4,15 +4,16 @@
  */
 package bildverarbeitung.filter;
 
+import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -49,7 +50,15 @@ public class Source extends DataSource {
     @Override
     public RawPackage readSource() throws Exception {
         JFileChooser chooser = new JFileChooser();
-    	chooser.setFileFilter(new FileFilter() {
+        setFileSelectionFilter(chooser);
+        File f = getChosenFile(chooser);
+//        Painter p = new Painter("asd",createImagePackage(f));
+        return (RawPackage) createImagePackage(f);
+    }
+    
+    
+    private void setFileSelectionFilter(JFileChooser chooser){
+        chooser.setFileFilter(new FileFilter() {
             public boolean accept(File f) {
                 String ext = ImageFileHelper.getExtension(f);
                 if(f.isDirectory()){
@@ -64,9 +73,10 @@ public class Source extends DataSource {
                 return "*.jpeg, *.jpg, *.png, *.bmp";
             }
     	});
-        
+    }
+    
+    private File getChosenFile(JFileChooser chooser){
         JFrame frame = new JFrame();
-        BufferedImage b = null;
         chooser.showOpenDialog(frame);
         
         File f = chooser.getSelectedFile();
@@ -77,9 +87,12 @@ public class Source extends DataSource {
             }
             JOptionPane.showMessageDialog(frame,errorMsg);
             chooser.showOpenDialog(frame);
-            f = chooser.getSelectedFile();
         }
-        
+        return f;
+    }
+    
+    private IImagePackage createImagePackage(File f) throws IOException{
+        BufferedImage b = ImageFileHelper.loadImageFromFile(f);
         return new RawPackage(b);
     }
     
