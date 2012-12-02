@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  *
  * @author green
  */
-public class Painter extends JComponent  implements PropertyChangeListener {
+public class Painter extends JComponent implements PropertyChangeListener {
     
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private IImagePackage imgPack;
