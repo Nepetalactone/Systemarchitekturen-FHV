@@ -7,7 +7,6 @@ package bildverarbeitung.filter;
 import bildverarbeitung.filterObjects.DilatePackage;
 import bildverarbeitung.filterObjects.ErodePackage;
 import bildverarbeitung.filterObjects.IImagePackage;
-import bildverarbeitung.filterObjects.MedianPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
 import java.awt.image.BufferedImage;
@@ -51,16 +50,15 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
                     0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,});
 
         ParameterBlock pb = new ParameterBlock();
-        IImagePackage imgPackage = (IImagePackage) data;
-        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),imgPackage.getImage());
-        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+        this.workingCopy = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()));
         
 
         pb.addSource(b);
         pb.add(k);
 
         RenderedImage img = JAI.create("Erode", pb);
-        ErodePackage eroPack = new ErodePackage(imgPackage.getOriginal(), img);
+        ErodePackage eroPack = new ErodePackage(workingCopy.getOriginal(), img);
 
         result = eroPack;
 
