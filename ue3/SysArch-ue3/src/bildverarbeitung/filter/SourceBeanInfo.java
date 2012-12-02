@@ -21,7 +21,7 @@ public class SourceBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
-    private static final int PROPERTY_isActive = 0;
+    private static final int PROPERTY_active = 0;
 
     // Property array 
     /*lazy PropertyDescriptor*/
@@ -29,7 +29,7 @@ public class SourceBeanInfo extends SimpleBeanInfo {
         PropertyDescriptor[] properties = new PropertyDescriptor[1];
     
         try {
-            properties[PROPERTY_isActive] = new PropertyDescriptor ( "isActive", bildverarbeitung.filter.Source.class, "isIsActive", "setIsActive" ); // NOI18N
+            properties[PROPERTY_active] = new PropertyDescriptor ( "active", bildverarbeitung.filter.Source.class, "isActive", "setActive" ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
