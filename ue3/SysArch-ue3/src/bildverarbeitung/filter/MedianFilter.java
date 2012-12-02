@@ -50,9 +50,8 @@ public class MedianFilter extends Filter  implements PropertyChangeListener {
     public boolean filter(Object data) {
 
 
-        IImagePackage imgPackage = (IImagePackage) data;
-        workingCopy = new MedianPackage(imgPackage.getOriginal(),imgPackage.getImage());
-        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+        workingCopy = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()));
 
         ParameterBlock pb = new ParameterBlock();
 
@@ -61,7 +60,7 @@ public class MedianFilter extends Filter  implements PropertyChangeListener {
         pb.add(maskSize);
 
         RenderedImage input = JAI.create("medianfilter", pb, null);
-        MedianPackage medianPack = new MedianPackage(imgPackage.getOriginal(), input);
+        MedianPackage medianPack = new MedianPackage(workingCopy.getOriginal(), input);
 
         result = medianPack;
         return true;

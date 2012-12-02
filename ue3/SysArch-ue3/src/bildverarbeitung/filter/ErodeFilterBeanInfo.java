@@ -31,19 +31,11 @@ public class ErodeFilterBeanInfo extends SimpleBeanInfo {
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
-    private static final int EVENT_propertyChangeListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
-    
-        try {
-            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.ErodeFilter.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
-        }
-        catch(IntrospectionException e) {
-            e.printStackTrace();
-        }//GEN-HEADEREND:Events
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[0];//GEN-HEADEREND:Events
 
         // Here you can add code for customizing the event sets array.
 
@@ -51,35 +43,29 @@ public class ErodeFilterBeanInfo extends SimpleBeanInfo {
     // Method identifiers//GEN-FIRST:Methods
     private static final int METHOD_addInputPipe0 = 0;
     private static final int METHOD_addOutputPipe1 = 1;
-    private static final int METHOD_filter2 = 2;
-    private static final int METHOD_propertyChange3 = 3;
-    private static final int METHOD_pull4 = 4;
-    private static final int METHOD_push5 = 5;
-    private static final int METHOD_removeInputPipe6 = 6;
-    private static final int METHOD_removeOutputPipe7 = 7;
+    private static final int METHOD_pull2 = 2;
+    private static final int METHOD_push3 = 3;
+    private static final int METHOD_removeInputPipe4 = 4;
+    private static final int METHOD_removeOutputPipe5 = 5;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[8];
+        MethodDescriptor[] methods = new MethodDescriptor[6];
     
         try {
             methods[METHOD_addInputPipe0] = new MethodDescriptor(framework.filter.Filter.class.getMethod("addInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
             methods[METHOD_addInputPipe0].setDisplayName ( "" );
             methods[METHOD_addOutputPipe1] = new MethodDescriptor(framework.filter.Filter.class.getMethod("addOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
             methods[METHOD_addOutputPipe1].setDisplayName ( "" );
-            methods[METHOD_filter2] = new MethodDescriptor(bildverarbeitung.filter.ErodeFilter.class.getMethod("filter", new Class[] {java.lang.Object.class})); // NOI18N
-            methods[METHOD_filter2].setDisplayName ( "" );
-            methods[METHOD_propertyChange3] = new MethodDescriptor(bildverarbeitung.filter.ErodeFilter.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
-            methods[METHOD_propertyChange3].setDisplayName ( "" );
-            methods[METHOD_pull4] = new MethodDescriptor(framework.filter.Filter.class.getMethod("pull", new Class[] {})); // NOI18N
-            methods[METHOD_pull4].setDisplayName ( "" );
-            methods[METHOD_push5] = new MethodDescriptor(framework.filter.Filter.class.getMethod("push", new Class[] {java.lang.Object.class})); // NOI18N
-            methods[METHOD_push5].setDisplayName ( "" );
-            methods[METHOD_removeInputPipe6] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_removeInputPipe6].setDisplayName ( "" );
-            methods[METHOD_removeOutputPipe7] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_removeOutputPipe7].setDisplayName ( "" );
+            methods[METHOD_pull2] = new MethodDescriptor(framework.filter.Filter.class.getMethod("pull", new Class[] {})); // NOI18N
+            methods[METHOD_pull2].setDisplayName ( "" );
+            methods[METHOD_push3] = new MethodDescriptor(framework.filter.Filter.class.getMethod("push", new Class[] {java.lang.Object.class})); // NOI18N
+            methods[METHOD_push3].setDisplayName ( "" );
+            methods[METHOD_removeInputPipe4] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
+            methods[METHOD_removeInputPipe4].setDisplayName ( "" );
+            methods[METHOD_removeOutputPipe5] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
+            methods[METHOD_removeOutputPipe5].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 

@@ -47,15 +47,14 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
 
         
         ParameterBlock pb = new ParameterBlock();
-        IImagePackage imgPackage = (IImagePackage) data;
-        this.workingCopy = new DilatePackage(imgPackage.getOriginal(),imgPackage.getImage());
-        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage()));
+        this.workingCopy = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()));
         
         pb.addSource(b);
         pb.add(k);
 
         RenderedImage img = JAI.create("Dilate", pb);
-        DilatePackage dilPack = new DilatePackage(imgPackage.getOriginal(), img);
+        DilatePackage dilPack = new DilatePackage(workingCopy.getOriginal(), img);
         result = dilPack;
         return true;
     }

@@ -87,11 +87,14 @@ public class Source extends DataSource implements PropertyChangeListener, Action
     	});
     }
     
-    private File getChosenFile(JFileChooser chooser){
+    private File getChosenFile(JFileChooser chooser) throws Exception{
         JFrame frame = new JFrame();
         chooser.showOpenDialog(frame);
         
         File f = chooser.getSelectedFile();
+        if(f == null){
+            throw new Exception("Action canceled");
+        }
         while(!extensions.contains(ImageFileHelper.getExtension(f))){
             String errorMsg = "Valid file extensions are: ";
             for(String s: extensions){
@@ -119,12 +122,12 @@ public class Source extends DataSource implements PropertyChangeListener, Action
 
     
     public void setIsActive(boolean isAcvtive){
-        boolean old = super.isIsActive();
-        super.setIsActive(isActive);
-        change.firePropertyChange("isActive",old,isActive);
+        boolean old = super.isActive();
+        super.setActive(active);
+        change.firePropertyChange("isActive",old,active);
     }
     public boolean isIsActive(){
-        return super.isIsActive();
+        return super.isActive();
     }
     
     public void addActionListener(ActionListener l){

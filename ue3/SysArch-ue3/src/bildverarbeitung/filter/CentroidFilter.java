@@ -5,22 +5,16 @@
 package bildverarbeitung.filter;
 
 import bildverarbeitung.filterObjects.CentroidPackage;
-import bildverarbeitung.filterObjects.DilatePackage;
 import bildverarbeitung.filterObjects.IImagePackage;
-import bildverarbeitung.filterObjects.ROIPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.RenderedImage;
-import java.awt.image.WritableRaster;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,11 +38,10 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
 
     @Override
     public boolean filter(Object data) {
-        IImagePackage imgPackage = (IImagePackage) data;
-        BufferedImage b = ImageFileHelper.convertRenderedImageToBufferedImage(imgPackage.getImage());
+        this.workingCopy = (IImagePackage) data;
+        BufferedImage b = ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage());
         Point center = getCenter(b);
-        this.workingCopy = new CentroidPackage(imgPackage.getOriginal(),b,center);
-        result = workingCopy;
+        result = new CentroidPackage(workingCopy.getOriginal(),workingCopy.getImage(),center);
         return true;
         
     }

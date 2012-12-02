@@ -8,21 +8,21 @@ import java.util.ArrayList;
 
 public abstract class DataSource<T> implements Serializable{
 	
-    public static final boolean ACTIVE_SOURCE = true;
-    public static final boolean PASSIVE_SOURCE = false;
+    //public static final boolean ACTIVE_SOURCE = true;
+   // public static final boolean PASSIVE_SOURCE = false;
 
     protected Collection<IPipe> outputPipes;
-    protected boolean isActive;
+    protected boolean active;
     protected T data;
 
 
     public DataSource(){
         initCollections();
-        isActive = false;
+        active = false;
     }
 
     public DataSource(boolean isActive){
-            this.isActive = isActive;
+            this.active = isActive;
             initCollections();
     }
 
@@ -35,7 +35,7 @@ public abstract class DataSource<T> implements Serializable{
             if(data == null){
                 throw new Exception("Could not load File");
             }
-            if(isActive){
+            if(active){
                     for(IPipe p: outputPipes){
                             p.push(data);
                     }
@@ -63,12 +63,12 @@ public abstract class DataSource<T> implements Serializable{
         this.outputPipes = outputPipes;
     }
 
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean isActive) {
+        this.active = isActive;
     }
 
     public T getData() {
