@@ -6,9 +6,11 @@ package bildverarbeitung.filterObjects.helper;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 import javax.imageio.ImageIO;
 
 /**
@@ -58,5 +60,27 @@ public class ImageFileHelper {
         return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
     
+    public static BufferedImage convertRenderedImageToBufferedImage(RenderedImage img){
+        if(img instanceof BufferedImage){
+            return (BufferedImage) img;
+        }
+        
+        ColorModel cm = img.getColorModel();
+        int width = img.getWidth();
+        int height = img.getHeight();
+        WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        Hashtable properties = new Hashtable();
+        String[] keys = img.getPropertyNames();
+        
+        if(keys != null){
+            for(int i = 0; i < keys.length; i++){
+                properties.put(keys[i], img.getProperty(keys[i]));
+            }
+        }
+        BufferedImage result = new BufferedImage(cm, raster , isAlphaPremultiplied, properties);
+        img.copyData(raster);
+        return result;
+    }
 }
 
