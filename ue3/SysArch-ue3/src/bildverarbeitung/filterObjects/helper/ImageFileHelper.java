@@ -39,6 +39,9 @@ public class ImageFileHelper {
     }
     
     public static String getExtension(File f) {
+        if(f == null){
+            return "";
+        }
         String ext = null;
         String s = f.getName();
         int i = s.lastIndexOf('.');

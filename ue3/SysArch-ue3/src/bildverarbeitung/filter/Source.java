@@ -8,10 +8,13 @@ import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +25,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 /**
  *
  * @author Tobias
  */
-public class Source extends DataSource implements MouseListener{
+public class Source extends DataSource implements PropertyChangeListener, ActionListener{
 
     private PropertyChangeSupport change;
     
@@ -113,15 +117,15 @@ public class Source extends DataSource implements MouseListener{
 //        }
 //    }
 
-    public void addMouseListener(MouseListener l){
+    public void addActionListener(ActionListener l){
     }
     
-    public void removeMouseListener(MouseListener l){
+    public void removeActionListener(ActionListener l){
     }
     
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void actionPerformed(ActionEvent e) {
         try {
             run();
         } catch (Exception ex) {
@@ -129,19 +133,16 @@ public class Source extends DataSource implements MouseListener{
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+    public void addPropertyChangeListener(PropertyChangeListener l){
+        change.addPropertyChangeListener(l);
     }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    
+    public void removePropertyChangeListener(PropertyChangeListener l){
+        change.removePropertyChangeListener(l);
     }
-
+    
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
+    public void propertyChange(PropertyChangeEvent evt) {
+        
     }
 }
