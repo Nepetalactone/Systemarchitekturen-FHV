@@ -21,15 +21,17 @@ public class ROIFilterBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
-    private static final int PROPERTY_roi = 0;
+    private static final int PROPERTY_height = 0;
+    private static final int PROPERTY_width = 1;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[1];
+        PropertyDescriptor[] properties = new PropertyDescriptor[2];
     
         try {
-            properties[PROPERTY_roi] = new PropertyDescriptor ( "roi", bildverarbeitung.filter.ROIFilter.class, "getRoi", "setRoi" ); // NOI18N
+            properties[PROPERTY_height] = new PropertyDescriptor ( "height", bildverarbeitung.filter.ROIFilter.class, "getHeight", "setHeight" ); // NOI18N
+            properties[PROPERTY_width] = new PropertyDescriptor ( "width", bildverarbeitung.filter.ROIFilter.class, "getWidth", "setWidth" ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();

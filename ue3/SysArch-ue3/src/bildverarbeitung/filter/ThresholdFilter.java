@@ -21,9 +21,40 @@ import javax.media.jai.JAI;
 public class ThresholdFilter<in, out> extends Filter<in, out> implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    private int lowValue;
+    private int highValue;
+    private int constantValue;
+
+    public int getLowValue() {
+        return lowValue;
+    }
+
+    public void setLowValue(int lowValue) {
+        this.lowValue = lowValue;
+    }
+
+    public int getHighValue() {
+        return highValue;
+    }
+
+    public void setHighValue(int highValue) {
+        this.highValue = highValue;
+    }
+
+    public int getConstantValue() {
+        return constantValue;
+    }
+
+    public void setConstantValue(int constantValue) {
+        this.constantValue = constantValue;
+    }
     
     public ThresholdFilter() {
         super();
+        //default Values
+        lowValue = 0;
+        highValue = 33;
+        constantValue = 255;
     }
 
     @Override
@@ -32,9 +63,9 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
         //0,254,0
         //
         ROIPackage roiImage = (ROIPackage) data;
-        double[] low = new double[]{0, 0, 0};
-        double[] high = new double[]{33, 33, 33};
-        double[] constants = new double[]{255, 255, 255};
+        double[] low = new double[]{lowValue, lowValue, lowValue};
+        double[] high = new double[]{highValue, highValue, highValue};
+        double[] constants = new double[]{constantValue, constantValue, constantValue};
 
         ParameterBlock pb = new ParameterBlock();
         pb.addSource(roiImage.getImage());

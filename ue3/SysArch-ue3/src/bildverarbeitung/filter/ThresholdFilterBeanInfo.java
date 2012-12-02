@@ -21,11 +21,23 @@ public class ThresholdFilterBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
+    private static final int PROPERTY_constantValue = 0;
+    private static final int PROPERTY_highValue = 1;
+    private static final int PROPERTY_lowValue = 2;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[0];//GEN-HEADEREND:Properties
+        PropertyDescriptor[] properties = new PropertyDescriptor[3];
+    
+        try {
+            properties[PROPERTY_constantValue] = new PropertyDescriptor ( "constantValue", bildverarbeitung.filter.ThresholdFilter.class, "getConstantValue", "setConstantValue" ); // NOI18N
+            properties[PROPERTY_highValue] = new PropertyDescriptor ( "highValue", bildverarbeitung.filter.ThresholdFilter.class, "getHighValue", "setHighValue" ); // NOI18N
+            properties[PROPERTY_lowValue] = new PropertyDescriptor ( "lowValue", bildverarbeitung.filter.ThresholdFilter.class, "getLowValue", "setLowValue" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Properties
 
         // Here you can add code for customizing the properties array.
 

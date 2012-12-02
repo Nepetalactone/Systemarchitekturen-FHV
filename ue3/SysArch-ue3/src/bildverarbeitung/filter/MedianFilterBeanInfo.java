@@ -21,11 +21,19 @@ public class MedianFilterBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
+    private static final int PROPERTY_maskSize = 0;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[0];//GEN-HEADEREND:Properties
+        PropertyDescriptor[] properties = new PropertyDescriptor[1];
+    
+        try {
+            properties[PROPERTY_maskSize] = new PropertyDescriptor ( "maskSize", bildverarbeitung.filter.MedianFilter.class, "getMaskSize", "setMaskSize" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Properties
 
         // Here you can add code for customizing the properties array.
 

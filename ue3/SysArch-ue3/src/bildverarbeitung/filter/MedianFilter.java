@@ -22,9 +22,19 @@ import javax.media.jai.operator.MedianFilterDescriptor;
 public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    private int maskSize;
+
+    public int getMaskSize() {
+        return maskSize;
+    }
+
+    public void setMaskSize(int maskSize) {
+        this.maskSize = maskSize;
+    }
     
     public MedianFilter() {
         super();
+        maskSize = 3; //default size
     }
 
     @Override
@@ -36,7 +46,7 @@ public class MedianFilter<in, out> extends Filter<in, out>  implements PropertyC
 
         pb.addSource(ti.getImage());
         pb.add(MedianFilterDescriptor.MEDIAN_MASK_SQUARE);
-        pb.add(3);
+        pb.add(maskSize);
 
         RenderedImage input = JAI.create("medianfilter", pb, null);
         MedianPackage medianPack = new MedianPackage(ti.getOriginal(), input);

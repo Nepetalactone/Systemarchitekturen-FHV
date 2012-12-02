@@ -22,28 +22,38 @@ import javax.media.jai.PlanarImage;
 public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
+    private int height;
+    private int width;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
     
-    private Rectangle roi;
-
-    public Rectangle getRoi() {
-        return roi;
-    }
-
-    public void setRoi(Rectangle roi) {
-        this.roi = roi;
-    }
-
     public ROIFilter() {
         super();
     }
 
-    public ROIFilter(Rectangle roi) {
+    public ROIFilter(int height, int width) {
         super();
-        this.roi = roi;
+        this.height = height;
+        this.width = width;
     }
 
     @Override
     public boolean filter(in data) {
+        Rectangle roi = new Rectangle(width, height);
         RawPackage input = (RawPackage) data;
         BufferedImage img = (BufferedImage) input.getImg();
         PlanarImage image = PlanarImage.wrapRenderedImage(img);
