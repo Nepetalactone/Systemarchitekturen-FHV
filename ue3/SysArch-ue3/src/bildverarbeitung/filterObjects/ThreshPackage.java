@@ -18,7 +18,7 @@ public class ThreshPackage  implements IImagePackage {
     private BufferedImage original;
     private boolean showOriginal;
 
-    public ThreshPackage(RenderedImage image,BufferedImage original, boolean showOriginal) {
+    public ThreshPackage(BufferedImage original, RenderedImage image, boolean showOriginal) {
         this.image = image;
         this.original = original;
         this.showOriginal = showOriginal;

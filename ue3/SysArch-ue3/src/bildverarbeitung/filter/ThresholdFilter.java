@@ -9,6 +9,7 @@ import bildverarbeitung.filterObjects.ROIPackage;
 import bildverarbeitung.filterObjects.ThreshPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.filter.Filter;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.beans.PropertyChangeEvent;
@@ -17,6 +18,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.jai.JAI;
+import javax.media.jai.PlanarImage;
 
 /**
  *
@@ -83,8 +85,9 @@ public class ThresholdFilter extends Filter implements PropertyChangeListener {
         pb.add(low);
         pb.add(high);
         pb.add(constants);
-        RenderedImage thresh = JAI.create("threshold", pb);
-        ThreshPackage threshPack = new ThreshPackage(thresh, workingCopy.getOriginal(), false);
+        PlanarImage image = JAI.create("threshold", pb);
+        BufferedImage asd = image.getAsBufferedImage();
+        ThreshPackage threshPack = new ThreshPackage(workingCopy.getOriginal(), asd, false);
         result =  threshPack;
         change.firePropertyChange("result",this,result);
         return true;

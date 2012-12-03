@@ -18,6 +18,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.jai.JAI;
+import javax.media.jai.PlanarImage;
 import javax.media.jai.operator.MedianFilterDescriptor;
 
 /**
@@ -59,8 +60,9 @@ public class MedianFilter extends Filter  implements PropertyChangeListener {
         pb.add(MedianFilterDescriptor.MEDIAN_MASK_SQUARE);
         pb.add(maskSize);
 
-        RenderedImage input = JAI.create("medianfilter", pb, null);
-        MedianPackage medianPack = new MedianPackage(workingCopy.getOriginal(), input);
+        PlanarImage image = JAI.create("medianfilter", pb, null);
+        BufferedImage asd = image.getAsBufferedImage();
+        MedianPackage medianPack = new MedianPackage(workingCopy.getOriginal(), asd);
 
         result = medianPack;
         change.firePropertyChange("result",this,result);
