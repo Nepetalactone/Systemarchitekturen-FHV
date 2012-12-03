@@ -16,7 +16,7 @@ import javax.media.jai.PlanarImage;
 public class ROIPackage implements IImagePackage  {
     
     
-    private PlanarImage image;
+    private RenderedImage image;
     private BufferedImage original;
     private Rectangle rectangle;
     private boolean showRectangle;

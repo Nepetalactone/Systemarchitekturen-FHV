@@ -41,11 +41,11 @@ public class CentroidPackage implements IImagePackage{
 
     @Override
     public void setImage(RenderedImage img) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.image = img;
     }
 
     @Override
     public void setOriginal(BufferedImage img) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.original = img;
     }
 }
