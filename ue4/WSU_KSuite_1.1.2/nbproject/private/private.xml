@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/KSMain.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/Sensor.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/Collision.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/Controller.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/DirectoryClassLoader.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/DrawableRobot.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/KSReader.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/KSWriter.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/MyPoint.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/RobotControllerDirector.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/RobotController.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/LvtPanel.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/Motor.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/RobotCoordinates.java</file>
+        <file>file:/C:/Users/christoph/Documents/NetBeansProjects/WSU_KSuite_1.1.2/src/edu/wsu/KheperaSimulator/CurrentRobotState.java</file>
+    </open-files>
+</project-private>
