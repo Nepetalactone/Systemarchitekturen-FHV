@@ -8,6 +8,7 @@ import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.RawPackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSource;
+import framework.pipe.IPipe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -64,8 +65,10 @@ public class Source extends DataSource implements PropertyChangeListener, Action
         JFileChooser chooser = new JFileChooser();
         setFileSelectionFilter(chooser);
         File f = getChosenFile(chooser);
-//        Painter p = new Painter("asd",createImagePackage(f));
-        return (RawPackage) createImagePackage(f);
+        RawPackage p = (RawPackage) createImagePackage(f);
+        change.firePropertyChange("result",null,p);
+        PropertyChangeListener[] a = change.getPropertyChangeListeners();
+        return p;
     }
     
     
@@ -121,14 +124,7 @@ public class Source extends DataSource implements PropertyChangeListener, Action
 //    }
 
     
-    public void setIsActive(boolean isAcvtive){
-        boolean old = super.isActive();
-        super.setActive(active);
-        change.firePropertyChange("isActive",old,active);
-    }
-    public boolean isIsActive(){
-        return super.isActive();
-    }
+
     
     public void addActionListener(ActionListener l){
     }

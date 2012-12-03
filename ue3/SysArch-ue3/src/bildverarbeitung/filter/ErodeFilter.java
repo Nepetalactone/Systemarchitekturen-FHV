@@ -75,6 +75,7 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        
         try {
             if(workingCopy != null){
                 push(workingCopy);

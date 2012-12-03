@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public abstract class DataSink<T> implements Serializable{
 	
-	public static final boolean ACTIVE_SINK = true;
-	public static final boolean PASSIVE_SINK = false;
+	//public static final boolean ACTIVE_SINK = true;
+	//public static final boolean PASSIVE_SINK = false;
 	
 	protected Collection<IPipe> inputPipes;
-	protected boolean isActive;
+	protected boolean active;
 	protected Collection<T> finishedObjects;
 	
 	
@@ -21,7 +21,7 @@ public abstract class DataSink<T> implements Serializable{
             
         }
 	public DataSink(boolean isActive){
-		this.isActive = isActive;
+		this.active = isActive;
                 initCollections();
 	}
 	
@@ -30,7 +30,7 @@ public abstract class DataSink<T> implements Serializable{
             this.finishedObjects = new ArrayList<T>();
         }
 	public void run() throws Exception{
-		if(isActive){
+		if(active){
 			for(IPipe p: inputPipes){
 				T temp = (T) p.pull();
 				if(temp != null){
@@ -57,12 +57,12 @@ public abstract class DataSink<T> implements Serializable{
 		this.inputPipes.remove(pipe);
 	}
 
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean isActive) {
+        this.active = isActive;
     }
         
 }
