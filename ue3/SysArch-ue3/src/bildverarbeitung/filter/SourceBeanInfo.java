@@ -21,19 +21,11 @@ public class SourceBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
-    private static final int PROPERTY_active = 0;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[1];
-    
-        try {
-            properties[PROPERTY_active] = new PropertyDescriptor ( "active", bildverarbeitung.filter.Source.class, "isActive", "setActive" ); // NOI18N
-        }
-        catch(IntrospectionException e) {
-            e.printStackTrace();
-        }//GEN-HEADEREND:Properties
+        PropertyDescriptor[] properties = new PropertyDescriptor[0];//GEN-HEADEREND:Properties
 
         // Here you can add code for customizing the properties array.
 
@@ -61,20 +53,17 @@ public class SourceBeanInfo extends SimpleBeanInfo {
     // Method identifiers//GEN-FIRST:Methods
     private static final int METHOD_actionPerformed0 = 0;
     private static final int METHOD_propertyChange1 = 1;
-    private static final int METHOD_pull2 = 2;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[3];
+        MethodDescriptor[] methods = new MethodDescriptor[2];
     
         try {
             methods[METHOD_actionPerformed0] = new MethodDescriptor(bildverarbeitung.filter.Source.class.getMethod("actionPerformed", new Class[] {java.awt.event.ActionEvent.class})); // NOI18N
             methods[METHOD_actionPerformed0].setDisplayName ( "" );
             methods[METHOD_propertyChange1] = new MethodDescriptor(bildverarbeitung.filter.Source.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
             methods[METHOD_propertyChange1].setDisplayName ( "" );
-            methods[METHOD_pull2] = new MethodDescriptor(framework.endpoint.DataSource.class.getMethod("pull", new Class[] {})); // NOI18N
-            methods[METHOD_pull2].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 

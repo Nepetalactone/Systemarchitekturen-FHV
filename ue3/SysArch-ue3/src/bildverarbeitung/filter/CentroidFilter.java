@@ -44,7 +44,7 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         BufferedImage b = ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage());
         Point center = getCenter(b);
         result = new CentroidPackage(workingCopy.getOriginal(),workingCopy.getImage(),center);
-        change.firePropertyChange("result",null,result);
+        change.firePropertyChange("result",this,result);
         return true;
         
     }

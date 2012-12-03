@@ -66,7 +66,7 @@ public class Source extends DataSource implements PropertyChangeListener, Action
         setFileSelectionFilter(chooser);
         File f = getChosenFile(chooser);
         RawPackage p = (RawPackage) createImagePackage(f);
-        change.firePropertyChange("result",null,p);
+        change.firePropertyChange("result",this,p);
         return p;
     }
     
