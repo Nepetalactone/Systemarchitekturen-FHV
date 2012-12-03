@@ -96,9 +96,11 @@ public class Painter extends JComponent implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        this.imgPack = (IImagePackage) evt.getNewValue();
-        this.name = imgPack.getClass().getName();
-        this.repaint();
+        if(evt.getPropertyName().equals("result")){
+            this.imgPack = (IImagePackage) evt.getNewValue();
+            this.name = imgPack.getClass().getName();
+            this.repaint();
+        }
     }
 
     public PropertyChangeSupport getChange() {

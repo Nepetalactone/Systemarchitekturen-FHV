@@ -81,6 +81,9 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
+            if(evt.getPropertyName().equals("result")){
+                workingCopy = (IImagePackage) evt.getNewValue();
+            }
             if(workingCopy != null){
                 push(workingCopy);
             }
