@@ -8,14 +8,14 @@ import java.beans.*;
 
 /**
  *
- * @author Tobias
+ * @author green
  */
-public class FileChooserButtonBeanInfo extends SimpleBeanInfo {
+public class StartBeanInfo extends SimpleBeanInfo {
 
     // Bean descriptor//GEN-FIRST:BeanDescriptor
     /*lazy BeanDescriptor*/
     private static BeanDescriptor getBdescriptor(){
-        BeanDescriptor beanDescriptor = new BeanDescriptor  ( bildverarbeitung.filter.FileChooserButton.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
+        BeanDescriptor beanDescriptor = new BeanDescriptor  ( bildverarbeitung.filter.Start.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
 
         // Here you can add code for customizing the BeanDescriptor.
 
@@ -31,11 +31,19 @@ public class FileChooserButtonBeanInfo extends SimpleBeanInfo {
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
+    private static final int EVENT_actionListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[0];//GEN-HEADEREND:Events
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
+    
+        try {
+            eventSets[EVENT_actionListener] = new EventSetDescriptor ( bildverarbeitung.filter.Start.class, "actionListener", java.awt.event.ActionListener.class, new String[] {"actionPerformed"}, "addActionListener", "removeActionListener" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Events
 
         // Here you can add code for customizing the event sets array.
 
@@ -49,7 +57,7 @@ public class FileChooserButtonBeanInfo extends SimpleBeanInfo {
         MethodDescriptor[] methods = new MethodDescriptor[1];
     
         try {
-            methods[METHOD_actionPerformed0] = new MethodDescriptor(bildverarbeitung.filter.FileChooserButton.class.getMethod("actionPerformed", new Class[] {java.awt.event.ActionEvent.class})); // NOI18N
+            methods[METHOD_actionPerformed0] = new MethodDescriptor(bildverarbeitung.filter.Start.class.getMethod("actionPerformed", new Class[] {java.awt.event.ActionEvent.class})); // NOI18N
             methods[METHOD_actionPerformed0].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
