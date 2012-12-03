@@ -29,7 +29,6 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         
 	public CentroidFilter(){
 		super();
-                //change.addPropertyChangeListener(this);
 	}
         
         public void actionPerformed(java.awt.event.ActionEvent evt){
@@ -38,6 +37,9 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
 
     @Override
     public boolean filter(Object data) {
+        if(data == null){
+            return false;
+        }
         this.workingCopy = (IImagePackage) data;
         BufferedImage b = ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage());
         Point center = getCenter(b);
@@ -65,9 +67,11 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
             }
         }
         
+        if(counter == 0){
+            return new Point(0,0);
+        }
         int xx = Math.round(sumX / counter);
         int yy = Math.round(sumY / counter);
-        System.out.println(xx + " " + yy);
         return new Point(xx,yy);
     }
     
@@ -82,12 +86,8 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-            if(evt.getPropertyName().equals("result")&& evt.getOldValue() == null){
-                workingCopy = (IImagePackage) evt.getNewValue();
-            }
-            if(workingCopy != null){
-                push(workingCopy);
-            }
+            workingCopy = (IImagePackage) evt.getNewValue();
+            push(workingCopy);
         } catch (Exception ex) {
             Logger.getLogger(CentroidFilter.class.getName()).log(Level.SEVERE, null, ex);
         }

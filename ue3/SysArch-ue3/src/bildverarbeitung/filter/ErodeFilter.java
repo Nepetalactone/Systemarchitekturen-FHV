@@ -77,9 +77,8 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         
         try {
-            if(workingCopy != null){
-                push(workingCopy);
-            }
+            workingCopy = (IImagePackage) evt.getNewValue();
+            push(workingCopy);
         } catch (Exception ex) {
             Logger.getLogger(ErodeFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
