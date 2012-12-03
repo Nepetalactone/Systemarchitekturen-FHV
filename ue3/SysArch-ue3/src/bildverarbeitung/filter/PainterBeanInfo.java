@@ -31,19 +31,11 @@ public class PainterBeanInfo extends SimpleBeanInfo {
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
-    private static final int EVENT_propertyChangeListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
-    
-        try {
-            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.Painter.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
-        }
-        catch(IntrospectionException e) {
-            e.printStackTrace();
-        }//GEN-HEADEREND:Events
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[0];//GEN-HEADEREND:Events
 
         // Here you can add code for customizing the event sets array.
 

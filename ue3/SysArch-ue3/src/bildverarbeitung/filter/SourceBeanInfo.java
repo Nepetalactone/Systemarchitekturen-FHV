@@ -31,16 +31,14 @@ public class SourceBeanInfo extends SimpleBeanInfo {
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
-    private static final int EVENT_actionListener = 0;
-    private static final int EVENT_propertyChangeListener = 1;
+    private static final int EVENT_propertyChangeListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[2];
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
     
         try {
-            eventSets[EVENT_actionListener] = new EventSetDescriptor ( bildverarbeitung.filter.Source.class, "actionListener", java.awt.event.ActionListener.class, new String[] {"actionPerformed"}, "addActionListener", "removeActionListener" ); // NOI18N
             eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.Source.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
         }
         catch(IntrospectionException e) {

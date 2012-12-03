@@ -38,7 +38,7 @@ public class Sink extends DataSink implements PropertyChangeListener {
         if(data instanceof IImagePackage){
             try {
                 IImagePackage p = (IImagePackage) data;
-                ImageFileHelper.saveImageToFile("FilteredImage_"+i+".png", (BufferedImage)p.getImage());
+                ImageFileHelper.saveImageToFile("FilteredImage_"+i+".png", ImageFileHelper.convertRenderedImageToBufferedImage(p.getImage()));
                 i++;
             } catch (IOException ex) {
                 Logger.getLogger(Sink.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,7 +56,13 @@ public class Sink extends DataSink implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        
+        try {
+            if(evt.getPropertyName().equals("result")){
+                push((IImagePackage) evt.getNewValue());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ROIFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
