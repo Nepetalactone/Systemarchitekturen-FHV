@@ -15,7 +15,6 @@ public class FileChooserButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
