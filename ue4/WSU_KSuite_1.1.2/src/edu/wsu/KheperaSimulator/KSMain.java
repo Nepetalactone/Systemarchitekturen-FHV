@@ -10,7 +10,7 @@ package edu.wsu.KheperaSimulator;
 import javax.swing.UIManager;
 import java.awt.*;
 
-/** lalaalala
+/**
  * Contains the main method.  The application environment is setup and the
  * simulator is constructed and shown.
  *
