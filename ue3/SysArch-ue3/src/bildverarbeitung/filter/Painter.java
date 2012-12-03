@@ -26,6 +26,7 @@ public class Painter extends JComponent implements PropertyChangeListener {
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private IImagePackage imgPack;
     private String name;
+    JFrame frame;
     
     
     public Painter(){

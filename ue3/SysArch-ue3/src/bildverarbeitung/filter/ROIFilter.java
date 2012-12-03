@@ -100,7 +100,7 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
         image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(roi, image.getColorModel()));
         ROIPackage roiImage = new ROIPackage(image, ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()), roi, true);
         result = (out) roiImage;
-
+        change.firePropertyChange("result",null,result);
         return true;
     }
     

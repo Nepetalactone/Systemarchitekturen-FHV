@@ -67,7 +67,6 @@ public class Source extends DataSource implements PropertyChangeListener, Action
         File f = getChosenFile(chooser);
         RawPackage p = (RawPackage) createImagePackage(f);
         change.firePropertyChange("result",null,p);
-        PropertyChangeListener[] a = change.getPropertyChangeListeners();
         return p;
     }
     

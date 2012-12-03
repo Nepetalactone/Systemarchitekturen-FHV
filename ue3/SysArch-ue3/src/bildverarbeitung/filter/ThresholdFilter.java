@@ -86,6 +86,7 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
         RenderedImage thresh = JAI.create("threshold", pb);
         ThreshPackage threshPack = new ThreshPackage(thresh, workingCopy.getOriginal(), false);
         result = (out) threshPack;
+        change.firePropertyChange("result",null,result);
         return true;
 
     }
