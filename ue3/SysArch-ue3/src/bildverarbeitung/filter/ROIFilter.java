@@ -32,6 +32,25 @@ public class ROIFilter extends Filter  implements PropertyChangeListener {
     private int width;
     private IImagePackage workingCopy;
 
+    public ROIFilter() {
+        super();
+        change.addPropertyChangeListener(this);
+        //default values
+        x = 0;
+        y = 50;
+        width = 447;
+        height = 55;
+    }
+
+    public ROIFilter(int x, int y, int height, int width) {
+        super();
+        change.addPropertyChangeListener(this);
+        this.x = x;
+        this.y = y;
+        this.height = height;
+        this.width = width;
+    }
+    
     public int getX() {
         return x;
     }
@@ -72,22 +91,7 @@ public class ROIFilter extends Filter  implements PropertyChangeListener {
         change.firePropertyChange("Width",old,width);
     }
     
-    public ROIFilter() {
-        super();
-        //default values
-        x = 0;
-        y = 50;
-        width = 447;
-        height = 55;
-    }
-
-    public ROIFilter(int x, int y, int height, int width) {
-        super();
-        this.x = x;
-        this.y = y;
-        this.height = height;
-        this.width = width;
-    }
+    
 
     @Override
     public boolean filter(Object data) {
@@ -98,7 +102,7 @@ public class ROIFilter extends Filter  implements PropertyChangeListener {
         image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(roi, image.getColorModel()));
         ROIPackage roiImage = new ROIPackage(image, ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()), roi, true);
         result = roiImage;
-        change.firePropertyChange("result",null,result);
+        change.firePropertyChange("result",this,result);
         return true;
     }
     
@@ -113,8 +117,14 @@ public class ROIFilter extends Filter  implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-            workingCopy = (IImagePackage) evt.getNewValue();
-            push(workingCopy);
+            if(evt.getPropertyName().equals("result")){
+                if(!(evt.getOldValue() == this)){
+                    push((IImagePackage) evt.getNewValue());
+                }
+            }else{
+                push(workingCopy);
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(ROIFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
