@@ -23,7 +23,7 @@ import javax.media.jai.PlanarImage;
  *
  * @author Tobias
  */
-public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChangeListener {
+public class ROIFilter extends Filter  implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private int x;
@@ -74,7 +74,6 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
     
     public ROIFilter() {
         super();
-        change.addPropertyChangeListener(this);
         //default values
         x = 0;
         y = 50;
@@ -84,7 +83,6 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
 
     public ROIFilter(int x, int y, int height, int width) {
         super();
-        change.addPropertyChangeListener(this);
         this.x = x;
         this.y = y;
         this.height = height;
@@ -92,14 +90,14 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
     }
 
     @Override
-    public boolean filter(in data) {
+    public boolean filter(Object data) {
         Rectangle roi = new Rectangle(x, y, width, height);
         workingCopy = (IImagePackage) data;
         BufferedImage img = (BufferedImage) ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()));
         PlanarImage image = PlanarImage.wrapRenderedImage(img);
         image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(roi, image.getColorModel()));
         ROIPackage roiImage = new ROIPackage(image, ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()), roi, true);
-        result = (out) roiImage;
+        result = roiImage;
         change.firePropertyChange("result",null,result);
         return true;
     }
@@ -115,11 +113,11 @@ public class ROIFilter<in, out> extends Filter<in, out>  implements PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-            if (workingCopy != null) {
-                push((in) workingCopy);
-            }
+            workingCopy = (IImagePackage) evt.getNewValue();
+            push(workingCopy);
         } catch (Exception ex) {
             Logger.getLogger(ROIFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

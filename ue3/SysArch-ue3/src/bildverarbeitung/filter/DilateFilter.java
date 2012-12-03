@@ -31,7 +31,6 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
     
     public DilateFilter() {
         super();
-        change.addPropertyChangeListener(this);
     }
 
     @Override
@@ -71,9 +70,8 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-             if(workingCopy != null){
-                push(workingCopy);
-             }
+             workingCopy = (IImagePackage) evt.getNewValue();
+             push(workingCopy);
         } catch (Exception ex) {
             Logger.getLogger(DilateFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
