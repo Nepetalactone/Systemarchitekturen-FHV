@@ -50,18 +50,15 @@ public class SourceBeanInfo extends SimpleBeanInfo {
         return eventSets;     }//GEN-LAST:Events
     // Method identifiers//GEN-FIRST:Methods
     private static final int METHOD_actionPerformed0 = 0;
-    private static final int METHOD_propertyChange1 = 1;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[2];
+        MethodDescriptor[] methods = new MethodDescriptor[1];
     
         try {
             methods[METHOD_actionPerformed0] = new MethodDescriptor(bildverarbeitung.filter.Source.class.getMethod("actionPerformed", new Class[] {java.awt.event.ActionEvent.class})); // NOI18N
             methods[METHOD_actionPerformed0].setDisplayName ( "" );
-            methods[METHOD_propertyChange1] = new MethodDescriptor(bildverarbeitung.filter.Source.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
-            methods[METHOD_propertyChange1].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 
