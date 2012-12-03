@@ -21,53 +21,44 @@ public class SinkBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
-    private static final int PROPERTY_active = 0;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[1];
-    
-        try {
-            properties[PROPERTY_active] = new PropertyDescriptor ( "active", bildverarbeitung.filter.Sink.class, "isActive", "setActive" ); // NOI18N
-        }
-        catch(IntrospectionException e) {
-            e.printStackTrace();
-        }//GEN-HEADEREND:Properties
+        PropertyDescriptor[] properties = new PropertyDescriptor[0];//GEN-HEADEREND:Properties
 
         // Here you can add code for customizing the properties array.
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
+    private static final int EVENT_propertyChangeListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[0];//GEN-HEADEREND:Events
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
+    
+        try {
+            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.Sink.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Events
 
         // Here you can add code for customizing the event sets array.
 
         return eventSets;     }//GEN-LAST:Events
     // Method identifiers//GEN-FIRST:Methods
-    private static final int METHOD_addInputPipe0 = 0;
-    private static final int METHOD_propertyChange1 = 1;
-    private static final int METHOD_push2 = 2;
-    private static final int METHOD_removeInputPipe3 = 3;
+    private static final int METHOD_propertyChange0 = 0;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[4];
+        MethodDescriptor[] methods = new MethodDescriptor[1];
     
         try {
-            methods[METHOD_addInputPipe0] = new MethodDescriptor(framework.endpoint.DataSink.class.getMethod("addInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_addInputPipe0].setDisplayName ( "" );
-            methods[METHOD_propertyChange1] = new MethodDescriptor(bildverarbeitung.filter.Sink.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
-            methods[METHOD_propertyChange1].setDisplayName ( "" );
-            methods[METHOD_push2] = new MethodDescriptor(framework.endpoint.DataSink.class.getMethod("push", new Class[] {java.lang.Object.class})); // NOI18N
-            methods[METHOD_push2].setDisplayName ( "" );
-            methods[METHOD_removeInputPipe3] = new MethodDescriptor(framework.endpoint.DataSink.class.getMethod("removeInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_removeInputPipe3].setDisplayName ( "" );
+            methods[METHOD_propertyChange0] = new MethodDescriptor(bildverarbeitung.filter.Sink.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
+            methods[METHOD_propertyChange0].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 

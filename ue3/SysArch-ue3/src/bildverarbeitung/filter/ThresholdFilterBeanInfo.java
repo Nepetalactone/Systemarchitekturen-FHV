@@ -61,37 +61,16 @@ public class ThresholdFilterBeanInfo extends SimpleBeanInfo {
 
         return eventSets;     }//GEN-LAST:Events
     // Method identifiers//GEN-FIRST:Methods
-    private static final int METHOD_addInputPipe0 = 0;
-    private static final int METHOD_addOutputPipe1 = 1;
-    private static final int METHOD_filter2 = 2;
-    private static final int METHOD_propertyChange3 = 3;
-    private static final int METHOD_pull4 = 4;
-    private static final int METHOD_push5 = 5;
-    private static final int METHOD_removeInputPipe6 = 6;
-    private static final int METHOD_removeOutputPipe7 = 7;
+    private static final int METHOD_propertyChange0 = 0;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[8];
+        MethodDescriptor[] methods = new MethodDescriptor[1];
     
         try {
-            methods[METHOD_addInputPipe0] = new MethodDescriptor(framework.filter.Filter.class.getMethod("addInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_addInputPipe0].setDisplayName ( "" );
-            methods[METHOD_addOutputPipe1] = new MethodDescriptor(framework.filter.Filter.class.getMethod("addOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_addOutputPipe1].setDisplayName ( "" );
-            methods[METHOD_filter2] = new MethodDescriptor(bildverarbeitung.filter.ThresholdFilter.class.getMethod("filter", new Class[] {java.lang.Object.class})); // NOI18N
-            methods[METHOD_filter2].setDisplayName ( "" );
-            methods[METHOD_propertyChange3] = new MethodDescriptor(bildverarbeitung.filter.ThresholdFilter.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
-            methods[METHOD_propertyChange3].setDisplayName ( "" );
-            methods[METHOD_pull4] = new MethodDescriptor(framework.filter.Filter.class.getMethod("pull", new Class[] {})); // NOI18N
-            methods[METHOD_pull4].setDisplayName ( "" );
-            methods[METHOD_push5] = new MethodDescriptor(framework.filter.Filter.class.getMethod("push", new Class[] {java.lang.Object.class})); // NOI18N
-            methods[METHOD_push5].setDisplayName ( "" );
-            methods[METHOD_removeInputPipe6] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeInputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_removeInputPipe6].setDisplayName ( "" );
-            methods[METHOD_removeOutputPipe7] = new MethodDescriptor(framework.filter.Filter.class.getMethod("removeOutputPipe", new Class[] {framework.pipe.IPipe.class})); // NOI18N
-            methods[METHOD_removeOutputPipe7].setDisplayName ( "" );
+            methods[METHOD_propertyChange0] = new MethodDescriptor(bildverarbeitung.filter.ThresholdFilter.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
+            methods[METHOD_propertyChange0].setDisplayName ( "" );
         }
         catch( Exception e) {}//GEN-HEADEREND:Methods
 

@@ -61,7 +61,7 @@ public class ErodeFilter extends Filter  implements PropertyChangeListener {
         ErodePackage eroPack = new ErodePackage(workingCopy.getOriginal(), img);
 
         result = eroPack;
-        change.firePropertyChange("result",null,result);
+        change.firePropertyChange("result",this,result);
         return true;
     }
     

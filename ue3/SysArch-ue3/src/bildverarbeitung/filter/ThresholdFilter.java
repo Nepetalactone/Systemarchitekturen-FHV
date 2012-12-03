@@ -22,7 +22,7 @@ import javax.media.jai.JAI;
  *
  * @author Tobias
  */
-public class ThresholdFilter<in, out> extends Filter<in, out> implements PropertyChangeListener {
+public class ThresholdFilter extends Filter implements PropertyChangeListener {
 
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private int lowValue;
@@ -69,7 +69,7 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     }
 
     @Override
-    public boolean filter(in data) {
+    public boolean filter(Object data) {
         //0,30,255
         //0,254,0
         //
@@ -85,8 +85,8 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
         pb.add(constants);
         RenderedImage thresh = JAI.create("threshold", pb);
         ThreshPackage threshPack = new ThreshPackage(thresh, workingCopy.getOriginal(), false);
-        result = (out) threshPack;
-        change.firePropertyChange("result",null,result);
+        result =  threshPack;
+        change.firePropertyChange("result",this,result);
         return true;
 
     }
@@ -102,8 +102,12 @@ public class ThresholdFilter<in, out> extends Filter<in, out> implements Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-            if (workingCopy != null) {
-                push((in)workingCopy);
+            if(evt.getPropertyName().equals("result")){
+                if(!(evt.getOldValue() == this)){
+                    push((IImagePackage) evt.getNewValue());
+                }
+            }else{
+                push(workingCopy);
             }
         } catch (Exception ex) {
             Logger.getLogger(ThresholdFilter.class.getName()).log(Level.SEVERE, null, ex);
