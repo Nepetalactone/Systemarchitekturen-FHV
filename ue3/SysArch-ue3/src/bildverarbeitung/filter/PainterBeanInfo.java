@@ -21,31 +21,54 @@ public class PainterBeanInfo extends SimpleBeanInfo {
 
         return beanDescriptor;     }//GEN-LAST:BeanDescriptor
     // Property identifiers//GEN-FIRST:Properties
+    private static final int PROPERTY_imgPack = 0;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[0];//GEN-HEADEREND:Properties
+        PropertyDescriptor[] properties = new PropertyDescriptor[1];
+    
+        try {
+            properties[PROPERTY_imgPack] = new PropertyDescriptor ( "imgPack", bildverarbeitung.filter.Painter.class, null, "setImgPack" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Properties
 
         // Here you can add code for customizing the properties array.
 
         return properties;     }//GEN-LAST:Properties
     // EventSet identifiers//GEN-FIRST:Events
+    private static final int EVENT_propertyChangeListener = 0;
 
     // EventSet array
     /*lazy EventSetDescriptor*/
     private static EventSetDescriptor[] getEdescriptor(){
-        EventSetDescriptor[] eventSets = new EventSetDescriptor[0];//GEN-HEADEREND:Events
+        EventSetDescriptor[] eventSets = new EventSetDescriptor[1];
+    
+        try {
+            eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor ( bildverarbeitung.filter.Painter.class, "propertyChangeListener", java.beans.PropertyChangeListener.class, new String[] {"propertyChange"}, "addPropertyChangeListener", "removePropertyChangeListener" ); // NOI18N
+        }
+        catch(IntrospectionException e) {
+            e.printStackTrace();
+        }//GEN-HEADEREND:Events
 
         // Here you can add code for customizing the event sets array.
 
         return eventSets;     }//GEN-LAST:Events
     // Method identifiers//GEN-FIRST:Methods
+    private static final int METHOD_propertyChange0 = 0;
 
     // Method array 
     /*lazy MethodDescriptor*/
     private static MethodDescriptor[] getMdescriptor(){
-        MethodDescriptor[] methods = new MethodDescriptor[0];//GEN-HEADEREND:Methods
+        MethodDescriptor[] methods = new MethodDescriptor[1];
+    
+        try {
+            methods[METHOD_propertyChange0] = new MethodDescriptor(bildverarbeitung.filter.Painter.class.getMethod("propertyChange", new Class[] {java.beans.PropertyChangeEvent.class})); // NOI18N
+            methods[METHOD_propertyChange0].setDisplayName ( "" );
+        }
+        catch( Exception e) {}//GEN-HEADEREND:Methods
 
         // Here you can add code for customizing the methods array.
         
