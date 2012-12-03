@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import javax.imageio.ImageIO;
+import javax.media.jai.PlanarImage;
 
 /**
  *

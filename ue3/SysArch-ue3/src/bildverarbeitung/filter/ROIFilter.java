@@ -100,7 +100,8 @@ public class ROIFilter extends Filter  implements PropertyChangeListener {
         BufferedImage img = (BufferedImage) ImageFileHelper.getDeepCopy(ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()));
         PlanarImage image = PlanarImage.wrapRenderedImage(img);
         image = PlanarImage.wrapRenderedImage((RenderedImage) image.getAsBufferedImage(roi, image.getColorModel()));
-        ROIPackage roiImage = new ROIPackage(image, ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()), roi, true);
+        BufferedImage asd = image.getAsBufferedImage(roi, image.getColorModel());
+        ROIPackage roiImage = new ROIPackage(asd, ImageFileHelper.convertRenderedImageToBufferedImage(workingCopy.getImage()), roi, true);
         result = roiImage;
         change.firePropertyChange("result",this,result);
         return true;

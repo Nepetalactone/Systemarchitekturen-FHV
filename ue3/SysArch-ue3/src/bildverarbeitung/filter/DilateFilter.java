@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.jai.JAI;
 import javax.media.jai.KernelJAI;
+import javax.media.jai.PlanarImage;
 
 /**
  *
@@ -52,8 +53,9 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
         pb.addSource(b);
         pb.add(k);
 
-        RenderedImage img = JAI.create("Dilate", pb);
-        DilatePackage dilPack = new DilatePackage(workingCopy.getOriginal(), img);
+        PlanarImage image = JAI.create("Dilate", pb);
+        BufferedImage asd = image.getAsBufferedImage();
+        DilatePackage dilPack = new DilatePackage(workingCopy.getOriginal(), asd);
         result = dilPack;
         change.firePropertyChange("result",this,result);
         return true;
@@ -70,8 +72,13 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-             workingCopy = (IImagePackage) evt.getNewValue();
-             push(workingCopy);
+             if(evt.getPropertyName().equals("result")){
+                if(!(evt.getOldValue() == this)){
+                    push((IImagePackage) evt.getNewValue());
+                }
+            }else{
+                push(workingCopy);
+            }
         } catch (Exception ex) {
             Logger.getLogger(DilateFilter.class.getName()).log(Level.SEVERE, null, ex);
         }

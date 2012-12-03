@@ -26,7 +26,7 @@ public class ROIPackage implements IImagePackage  {
         
     }
     
-    public ROIPackage(PlanarImage img, BufferedImage original, Rectangle rectangle, boolean showRectangle) {
+    public ROIPackage(RenderedImage img, BufferedImage original, Rectangle rectangle, boolean showRectangle) {
         this.image = img;
         this.original = original;
         this.rectangle = rectangle;

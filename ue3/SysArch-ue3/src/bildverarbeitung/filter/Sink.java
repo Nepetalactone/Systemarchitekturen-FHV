@@ -8,6 +8,7 @@ import bildverarbeitung.filterObjects.IImagePackage;
 import bildverarbeitung.filterObjects.helper.ImageFileHelper;
 import framework.endpoint.DataSink;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -38,7 +39,8 @@ public class Sink extends DataSink implements PropertyChangeListener {
         if(data instanceof IImagePackage){
             try {
                 IImagePackage p = (IImagePackage) data;
-                ImageFileHelper.saveImageToFile("FilteredImage_"+i+".png", ImageFileHelper.convertRenderedImageToBufferedImage(p.getImage()));
+                RenderedImage r = p.getImage();
+                ImageFileHelper.saveImageToFile("FilteredImage_"+i+".png", ImageFileHelper.convertRenderedImageToBufferedImage(r));
                 i++;
             } catch (IOException ex) {
                 Logger.getLogger(Sink.class.getName()).log(Level.SEVERE, null, ex);
