@@ -36,7 +36,7 @@ public class ImagePipe extends Pipe implements ActionListener,PropertyChangeList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        change.notifyAll();
     }
 
     public void addPropertyChangeListener(PropertyChangeListener l){
@@ -49,7 +49,8 @@ public class ImagePipe extends Pipe implements ActionListener,PropertyChangeList
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        
+        System.out.println("notifyFilter");
+        change.notifyAll();
     }
     
 }
