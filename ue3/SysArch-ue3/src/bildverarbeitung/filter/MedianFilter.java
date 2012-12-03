@@ -63,6 +63,7 @@ public class MedianFilter extends Filter  implements PropertyChangeListener {
         MedianPackage medianPack = new MedianPackage(workingCopy.getOriginal(), input);
 
         result = medianPack;
+        change.firePropertyChange("result",null,result);
         return true;
     }
     

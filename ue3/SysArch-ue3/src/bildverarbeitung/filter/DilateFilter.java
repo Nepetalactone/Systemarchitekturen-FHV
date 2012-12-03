@@ -56,6 +56,7 @@ public class DilateFilter extends Filter implements PropertyChangeListener  {
         RenderedImage img = JAI.create("Dilate", pb);
         DilatePackage dilPack = new DilatePackage(workingCopy.getOriginal(), img);
         result = dilPack;
+        change.firePropertyChange("result",null,result);
         return true;
     }
     
