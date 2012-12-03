@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  *
  * @author green
  */
-public class TestPainter implements PropertyChangeListener {
+public class Painter implements PropertyChangeListener {
     
     private PropertyChangeSupport change = new PropertyChangeSupport(this);
     private IImagePackage imgPack;
@@ -81,14 +81,14 @@ public class TestPainter implements PropertyChangeListener {
     private String title;
     
     
-    public TestPainter(String title,IImagePackage imgPack){
+    public Painter(String title,IImagePackage imgPack){
         super();
         frame.setTitle(title);
         frame.setSize(imgPack.getOriginal().getWidth(),imgPack.getOriginal().getHeight());
         frame.add(new PainterCanvas(imgPack));
         frame.setVisible(true);
     }
-    public TestPainter(){
+    public Painter(){
         
     }
     public void addPropertyChangeListener(PropertyChangeListener l){
