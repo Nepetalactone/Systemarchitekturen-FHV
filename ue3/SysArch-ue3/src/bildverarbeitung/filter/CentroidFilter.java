@@ -29,7 +29,7 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         
 	public CentroidFilter(){
 		super();
-                change.addPropertyChangeListener(this);
+                //change.addPropertyChangeListener(this);
 	}
         
         public void actionPerformed(java.awt.event.ActionEvent evt){
@@ -67,6 +67,7 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
         
         int xx = Math.round(sumX / counter);
         int yy = Math.round(sumY / counter);
+        System.out.println(xx + " " + yy);
         return new Point(xx,yy);
     }
     
@@ -81,7 +82,7 @@ public class CentroidFilter extends Filter implements Serializable, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         try {
-            if(evt.getPropertyName().equals("result")){
+            if(evt.getPropertyName().equals("result")&& evt.getOldValue() == null){
                 workingCopy = (IImagePackage) evt.getNewValue();
             }
             if(workingCopy != null){
