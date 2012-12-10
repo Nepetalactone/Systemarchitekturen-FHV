@@ -18,11 +18,13 @@ public class HitTheLights extends RobotController {
     @Override
     public void doWork() throws Exception {
 
-        if (this.getLightValue(2) < 400) {
-            this.setMotorSpeeds(2, 5);
-        } else if (this.getLightValue(3) < 400) {
-            this.setMotorSpeeds(5, 2);
-        } else if (getDistanceValue(2) > 50) {
+        if (this.getLightValue(2) < 400 || this.getLightValue(3) < 400) {
+            if(this.getLightValue(2) < this.getLightValue(3)){
+                this.setMotorSpeeds(2, 5);
+            }else{
+                this.setMotorSpeeds(5, 2);
+            }
+        }else if (getDistanceValue(2) > 50) {
             setMotorSpeeds(2, -5);
         } else if (getDistanceValue(3) > 50) {
             setMotorSpeeds(-5, 2);
@@ -37,7 +39,6 @@ public class HitTheLights extends RobotController {
         } else {
             this.setMotorSpeeds(5, 5);
         }
-
     }
 
     @Override

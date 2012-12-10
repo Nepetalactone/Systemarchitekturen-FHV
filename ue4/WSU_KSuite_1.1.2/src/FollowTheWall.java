@@ -24,7 +24,7 @@ public class FollowTheWall extends RobotController {
       
         if (this.getDistanceValue(3) > 200 || this.getDistanceValue(2) > 200) {
             x = -2; y = 5;
-        } else if (this.getDistanceValue(4) < 10 && this.getDistanceValue(5) > 200 && this.getDistanceValue(5) < 600) {
+        } else if (this.getDistanceValue(4) < 10 && this.getDistanceValue(5) > 200 && this.getDistanceValue(5) < 250) {
             x = 5; y = -2; 
         } else {
             x = 5; y = 5;
@@ -35,7 +35,6 @@ public class FollowTheWall extends RobotController {
     @Override
     public void close() throws Exception {
     }
-
     
     
 }
