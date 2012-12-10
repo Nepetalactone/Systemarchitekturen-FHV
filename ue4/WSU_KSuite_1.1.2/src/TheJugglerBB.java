@@ -10,9 +10,9 @@ import edu.wsu.KheperaSimulator.RobotController;
  *
  * @author green
  */
-public class TheJuggler extends RobotController {
+public class TheJugglerBB extends RobotController {
     
-    public TheJuggler() {
+    public TheJugglerBB() {
         this.setWaitTime(5L);
     }
     

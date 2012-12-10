@@ -9,11 +9,11 @@ import edu.wsu.KheperaSimulator.RobotController;
  *
  * @author green
  */
-public class FollowThatWall extends RobotController {
+public class FollowThatWallBB extends RobotController {
 
     boolean wallFound = false;
 
-    public FollowThatWall() {
+    public FollowThatWallBB() {
         this.setWaitTime(5L);
     }
 

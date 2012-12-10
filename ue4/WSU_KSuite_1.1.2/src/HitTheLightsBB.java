@@ -9,9 +9,9 @@ import edu.wsu.KheperaSimulator.RobotController;
  *
  * @author green
  */
-public class HitTheLights extends RobotController {
+public class HitTheLightsBB extends RobotController {
 
-    public HitTheLights() {
+    public HitTheLightsBB() {
         this.setWaitTime(5L);
     }
 
