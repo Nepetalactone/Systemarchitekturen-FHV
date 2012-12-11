@@ -10,15 +10,16 @@ import edu.wsu.KheperaSimulator.RobotController;
  *
  * @author green
  */
-public class TheJuggler extends RobotController{
+public class FollowThatWall extends RobotController{
 
     private double[][] matrix;
-    public TheJuggler(){
+    public FollowThatWall(){
         this.setWaitTime(5L);
         
         matrix = new double[][]{
-            { 20, 20, 5, 0, -20, -20, 0, 0},
-            { -20, -20, 0, 5, 20, 20, 0, 0}
+            {5, 5, 5, 5, -5, -5, -5, -4},
+            {-5, -5, 5, 5, 5, 5, -4, -5}
+            
         };
                            
     }
@@ -46,7 +47,7 @@ public class TheJuggler extends RobotController{
 
         for (int i = 0; i < 8; i++) {
             
-            sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
+            sensors[i] = (getDistanceValue(i) - 500.0) / -500.0;
             
             l += sensors[i] * matrix[0][i];
             r += sensors[i] * matrix[1][i];
