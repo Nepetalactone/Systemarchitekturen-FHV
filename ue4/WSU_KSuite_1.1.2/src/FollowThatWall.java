@@ -17,16 +17,16 @@ public class FollowThatWall extends RobotController{
         this.setWaitTime(5L);
         
         matrix = new double[][]{
-            {-5, -5, 15, 25,  20,  20, 0, 0},
-            { 5,  5, 25, 0, -20, -20, 0, 0}
+            {-20, -20, 0, 25,  5,  5, 0, 0},
+            { 20,  20, 25, 15, -5, -5, 0, 0}
             
                 //goht wenn ma koa hindernisse ibaut
 //            {-10, -5, 5, 7,  5,  10, 0, 0},
 //            { 10,  5, 7, 5, -5, -10, 0, 0}
                 
                 //der fahrt perfekte kurfen um alles, aber dreht sich zersch 1mol im kreis..
-//            {-5, -5, 15, 25,  20,  20, 0, 0},
-//            { 5,  5, 25, 0, -20, -20, 0, 0}
+//            {-20, -20, 0, 25,  5,  5, 0, 0},
+//            { 20,  20, 25, 15, -5, -5, 0, 0}
             
         };
                            
