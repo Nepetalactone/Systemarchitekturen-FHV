@@ -42,20 +42,19 @@ public class HitTheLights extends RobotController{
     
     private int[] getSpeed(){
         double l = 0, r = 0;
-        double[] sensors = getLightSensorsValues();
+        
+        
+        double[] sensors = new double[8];
+        for (int i = 0; i < 8; i++) {
+            sensors[i] = (getLightValue(i) - 500.0) / -500.0;
+        }
+        
+        
         for (int i = 0; i < 8; i++) {
             l += sensors[i] * matrix[0][i];
             r += sensors[i] * matrix[1][i];
         }
         return new int[]{(int) Math.round(l), (int) Math.round(r)};
-    }
-    
-    private double[] getLightSensorsValues(){
-        double[] sensors = new double[8];
-        for (int i = 0; i < 8; i++) {
-            sensors[i] = (getLightValue(i) - 500.0) / -500.0;
-        }
-        return sensors;
     }
     
 }
