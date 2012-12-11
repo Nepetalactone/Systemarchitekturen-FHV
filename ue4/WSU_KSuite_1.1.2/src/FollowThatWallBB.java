@@ -19,14 +19,14 @@ public class FollowThatWallBB extends RobotController {
 
     @Override
     public void doWork() throws Exception {
-
+        
+        this.setMotorSpeeds(5, 5);
         if(!wallFound){
             for(int i = 0; i < 7; i++){
                 if(getDistanceValue(i) > 1000){
                     wallFound = true;
                 }
             }
-            this.setMotorSpeeds(5, 5);
         }else{
             if(this.getDistanceValue(2) > 50 || this.getDistanceValue(3) > 50){
                 this.setMotorSpeeds(5,-5);
@@ -34,8 +34,6 @@ public class FollowThatWallBB extends RobotController {
                 this.setMotorSpeeds(2,5);
             }else if(this.getDistanceValue(0) > 50 || this.getDistanceValue(1) > 50){
                 this.setMotorSpeeds(5,2);
-            }else{
-                this.setMotorSpeeds(5,5);
             }
         }
 
