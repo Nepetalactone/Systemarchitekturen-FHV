@@ -17,12 +17,12 @@ public class FollowThatWall extends RobotController{
         this.setWaitTime(5L);
         
         matrix = new double[][]{
-            {-20, -20, 0, 25,  5,  5, 0, 0},
-            { 20,  20, 25, 15, -5, -5, 0, 0}
+            {-7, -7, 0, 9,  2,  2, 0, 0},
+            { 7,  7, 9, 4, -2, -2, 0, 0}
             
-                //goht wenn ma koa hindernisse ibaut
-//            {-10, -5, 5, 7,  5,  10, 0, 0},
-//            { 10,  5, 7, 5, -5, -10, 0, 0}
+                //mit berechnung nr2 a kle bessa
+//                {-7, -7, 0, 9,  2,  2, 0, 0},
+//                { 7,  7, 9, 4, -2, -2, 0, 0}
                 
                 //der fahrt perfekte kurfen um alles, aber dreht sich zersch 1mol im kreis..
 //            {-20, -20, 0, 25,  5,  5, 0, 0},
@@ -55,7 +55,11 @@ public class FollowThatWall extends RobotController{
 
         for (int i = 0; i < 8; i++) {
             
-            sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
+            //original
+            //sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
+            
+            //berechnung nr 2
+            sensors[i] = (1023.0 - getDistanceValue(i)) / 1023.0;
             l += sensors[i] * matrix[0][i];
             r += sensors[i] * matrix[1][i];
         }
