@@ -18,16 +18,16 @@ public class FollowThatWall extends RobotController{
         
         matrix = new double[][]{
             
-            {-6, -6, 0, 9,  1,  1, 0, 0},
-            { 6,  6, 9, 2, -1, -1, 0, 0}
+           //{-6, -6, 0, 9,  1,  1, 0, 0},
+           //{ 6,  6, 9, 2, -1, -1, 0, 0}
             
                 //mit berechnung nr2 a kle bessa
-//                {-7, -7, 0, 9,  2,  2, 0, 0},
-//                { 7,  7, 9, 4, -2, -2, 0, 0}
+                //{-7, -7, 0, 9,  2,  2, 0, 0},
+                //{ 7,  7, 9, 4, -2, -2, 0, 0}
                 
                 //der fahrt guate kurfen um alles, aber dreht sich zersch 1mol im kreis..
-//            {-20, -20, 0, 25,  5,  5, 0, 0},
-//            { 20,  20, 25, 15, -5, -5, 0, 0}
+            {-20, -20, 0, 25,  5,  5, 0, 0},
+            { 20,  20, 25, 15, -5, -5, 0, 0}
             
         };
                            
