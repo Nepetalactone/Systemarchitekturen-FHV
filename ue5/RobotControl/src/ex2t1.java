@@ -29,8 +29,8 @@ public class ex2t1 extends RobotController{
         lastPosition = new double[]{-1,-1};
         
         seekerMatrix = new double[][]{
-            { 0, 0, 5, 5, 0, 0, 0, 0},
-            { 0, 0, 5, 5, 0, 0, 0, 0}
+            { 2, 2, -5, 5, 5, 5, 0, 0},
+            { 5, 5, 5, -5, 2, 2, 0, 0}
         };
         pusherMatrix = new double[][]{
             { 20, 20, 5, 0, -20, -20, 0, 0},
@@ -41,6 +41,12 @@ public class ex2t1 extends RobotController{
             {  5,  5, -5, -5, -5, -5, 0, 0}
         };
         
+    }
+    
+    @Override
+    public void simStart(){
+        super.simStart();
+        this.setMotorSpeeds(5, 5);
     }
     
     @Override
@@ -75,8 +81,6 @@ public class ex2t1 extends RobotController{
     private boolean seekBall(){
         int[] speed = getSpeed(seekerMatrix);
         this.setMotorSpeeds(speed[0],speed[1]);
-        
-        
         //TODO if !ball found return false
         
         if ((getDistanceValue(2) == 1023) && 
@@ -128,12 +132,11 @@ public class ex2t1 extends RobotController{
 
         for (int i = 0; i < 8; i++) {
             
-            sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
+            sensors[i] = (1023.0 - getDistanceValue(i)) / 1023.0;
             
             l += sensors[i] * matrix[0][i];
             r += sensors[i] * matrix[1][i];
         }
-        
         return new int[]{(int) Math.round(l), (int) Math.round(r)};
     }
 }

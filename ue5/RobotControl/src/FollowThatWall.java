@@ -18,8 +18,8 @@ public class FollowThatWall extends RobotController{
         
         matrix = new double[][]{
             
-           //{-6, -6, 0, 9,  1,  1, 0, 0},
-           //{ 6,  6, 9, 2, -1, -1, 0, 0}
+//           {-6, -6, 0, 9,  1,  1, 0, 0},
+//           { 6,  6, 9, 2, -1, -1, 0, 0}
             
                 //mit berechnung nr2 a kle bessa
                 //{-7, -7, 0, 9,  2,  2, 0, 0},
