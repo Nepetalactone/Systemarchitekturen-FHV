@@ -21,6 +21,8 @@ public class ex2t1 extends RobotController{
     private int action = 0;
     private double backUpDistance = 1500;
     
+    private boolean isTestedForWall = false;
+    
     
     public ex2t1(){
         this.setWaitTime(5L);
@@ -77,7 +79,21 @@ public class ex2t1 extends RobotController{
         
         //TODO if !ball found return false
         
-        return true;
+        if ((getDistanceValue(2) == 1023) && 
+                (getDistanceValue(3) == 1023) && 
+                (lastPosition[0] != this.getLeftWheelPosition()) && 
+                (lastPosition[1] != this.getRightWheelPosition())){
+            
+            if (isTestedForWall == false){
+                isTestedForWall = true;
+                return false;
+            } else{
+                isTestedForWall = false;
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     private boolean pushBallToEdge(){
