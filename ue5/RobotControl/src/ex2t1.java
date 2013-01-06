@@ -21,9 +21,6 @@ public class ex2t1 extends RobotController{
     private int action = 0;
     private double backUpDistance = 1500;
     
-    private boolean isTestedForWall = false;
-    
-    
     public ex2t1(){
         this.setWaitTime(5L);
         lastPosition = new double[]{-1,-1};
