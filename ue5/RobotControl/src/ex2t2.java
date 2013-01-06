@@ -104,6 +104,11 @@ public class ex2t2 extends RobotController {
         if (getLightValue(2) < 100 || getLightValue(3) < 100) {
             return 0;
         }
+        
+        if ((getDistanceValue(0) > 1000) || (getDistanceValue(1) > 1000) || (getDistanceValue(4) > 1000) || (getDistanceValue(5) > 1000)) {
+            return 2;
+        }
+        
         //Roboter steckt in einer Wand
         if (this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()) {
             return 1;

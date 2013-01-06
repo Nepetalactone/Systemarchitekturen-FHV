@@ -59,9 +59,13 @@ public class ex2t1 extends RobotController{
                 break;
             case 1:
                 System.out.println("push");
-                if(pushBallToEdge()){
+                int pushBall = pushBallToEdge();
+                if(pushBall == 2){
                     action = 2;
+                } else if( pushBall == 1){
+                    action = 1;
                 }
+                
                 break;
             case 2:
                 System.out.println("back");
@@ -87,17 +91,21 @@ public class ex2t1 extends RobotController{
         return false;
     }
     
-    private boolean pushBallToEdge(){
+    private int pushBallToEdge(){
         
         int[] speed = getSpeed(pusherMatrix);
         this.setMotorSpeeds(speed[0],speed[1]); 
         
+        if ((getDistanceValue(0) > 1000) || (getDistanceValue(1) > 1000) || (getDistanceValue(4) > 1000) || (getDistanceValue(5) > 1000)) {
+            return 2;
+        }
+        
         if(this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()){
-            return true;
+            return 2;
         }
         this.lastPosition[0] = this.getLeftWheelPosition();
         this.lastPosition[1] = this.getRightWheelPosition();
-        return false;
+        return 1;
     }
     
     private boolean backUp(){
