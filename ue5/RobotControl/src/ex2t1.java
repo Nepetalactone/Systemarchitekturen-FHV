@@ -13,20 +13,31 @@ import edu.wsu.KheperaSimulator.RobotController;
 public class ex2t1 extends RobotController{
 
     
-    private double[][] matrix;
+    private double[][] seekerMatrix;
+    private double[][] pusherMatrix;
+    private double[][] frenchMatrix;
+    
     private double[] lastPosition;
     private int action = 0;
-    private double backUpDistance = 2000;
+    private double backUpDistance = 1500;
     
     
     public ex2t1(){
         this.setWaitTime(5L);
         lastPosition = new double[]{-1,-1};
-        matrix = new double[][]{
+        
+        seekerMatrix = new double[][]{
+            { 0, 0, 5, 5, 0, 0, 0, 0},
+            { 0, 0, 5, 5, 0, 0, 0, 0}
+        };
+        pusherMatrix = new double[][]{
             { 20, 20, 5, 0, -20, -20, 0, 0},
             { -20, -20, 0, 5, 20, 20, 0, 0}
         };
-    
+        frenchMatrix = new double[][]{
+            { -5, -5, -5, -5,  5,  5, 0, 0},
+            {  5,  5, -5, -5, -5, -5, 0, 0}
+        };
         
     }
     
@@ -60,10 +71,42 @@ public class ex2t1 extends RobotController{
     }
     
     private boolean seekBall(){
+        int[] speed = getSpeed(seekerMatrix);
+        this.setMotorSpeeds(speed[0],speed[1]);
+        
+        
+        //TODO if !ball found return false
+        
         return true;
     }
     
     private boolean pushBallToEdge(){
+        
+        int[] speed = getSpeed(pusherMatrix);
+        this.setMotorSpeeds(speed[0],speed[1]); 
+        
+        if(this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()){
+            return false;
+        }
+        this.lastPosition[0] = this.getLeftWheelPosition();
+        this.lastPosition[1] = this.getRightWheelPosition();
+        return true;
+    }
+    
+    private boolean backUp(){
+        
+        int[] speed = getSpeed(frenchMatrix);
+        this.setMotorSpeeds(speed[0],speed[1]); 
+        
+        
+        //TODO ned ganz sicher ob des so funktioniert, ma künnt anstatt zruckfahren o einfach solang dreha bis die hinteren sensoren an da wand stond
+        if(Math.abs(this.lastPosition[0] - this.getLeftWheelPosition()) < backUpDistance && Math.abs(this.lastPosition[1] - this.getRightWheelPosition()) < backUpDistance){
+            return false;
+        }
+        return true;
+    }
+    
+    private int[] getSpeed(double[][] matrix){
         double l = 0, r = 0;
         double[] sensors = new double[8];
 
@@ -75,21 +118,6 @@ public class ex2t1 extends RobotController{
             r += sensors[i] * matrix[1][i];
         }
         
-        this.setMotorSpeeds((int) Math.round(l), (int) Math.round(r)); 
-        
-        if(this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()){
-            return false;
-        }
-        this.lastPosition[0] = this.getLeftWheelPosition();
-        this.lastPosition[1] = this.getRightWheelPosition();
-        return true;
-    }
-    
-    private boolean backUp(){
-        this.setMotorSpeeds(-5, -5);
-        if(Math.abs(this.lastPosition[0] - this.getLeftWheelPosition()) < backUpDistance && Math.abs(this.lastPosition[1] - this.getRightWheelPosition()) < backUpDistance){
-            return false;
-        }
-        return true;
+        return new int[]{(int) Math.round(l), (int) Math.round(r)};
     }
 }
