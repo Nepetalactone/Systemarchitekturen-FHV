@@ -81,9 +81,8 @@ public class ex2t1 extends RobotController{
     private boolean seekBall(){
         int[] speed = getSpeed(seekerMatrix);
         this.setMotorSpeeds(speed[0],speed[1]);
-        //TODO if !ball found return false
         
-        if ((getDistanceValue(2) == 1023) && 
+        /*if ((getDistanceValue(2) == 1023) && 
                 (getDistanceValue(3) == 1023) && 
                 (lastPosition[0] != this.getLeftWheelPosition()) && 
                 (lastPosition[1] != this.getRightWheelPosition())){
@@ -97,7 +96,8 @@ public class ex2t1 extends RobotController{
             }
         }
         
-        return false;
+        return false;*/
+        return true;
     }
     
     private boolean pushBallToEdge(){
@@ -106,11 +106,11 @@ public class ex2t1 extends RobotController{
         this.setMotorSpeeds(speed[0],speed[1]); 
         
         if(this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()){
-            return false;
+            return true;
         }
         this.lastPosition[0] = this.getLeftWheelPosition();
         this.lastPosition[1] = this.getRightWheelPosition();
-        return true;
+        return false;
     }
     
     private boolean backUp(){
