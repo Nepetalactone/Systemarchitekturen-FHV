@@ -29,8 +29,8 @@ public class ex2t1 extends RobotController{
         lastPosition = new double[]{-1,-1};
         
         seekerMatrix = new double[][]{
-            { 2, 2, -5, 5, 5, 5, 0, 0},
-            { 5, 5, 5, -5, 2, 2, 0, 0}
+            { 5, 5, 5, 0, -5, -5, 0, 0},
+            { -5, -5, 0, 5, 5, 5, 0, 0}
         };
         pusherMatrix = new double[][]{
             { 20, 20, 5, 0, -20, -20, 0, 0},
@@ -55,16 +55,19 @@ public class ex2t1 extends RobotController{
         
         switch(action){
             case 0:
+                System.out.println("seek");
                 if(seekBall()){
                     action = 1;
                 }
                 break;
             case 1:
+                System.out.println("push");
                 if(pushBallToEdge()){
                     action = 2;
                 }
                 break;
             case 2:
+                System.out.println("back");
                 if(backUp()){
                     action = 0;
                 }
@@ -81,22 +84,10 @@ public class ex2t1 extends RobotController{
     private boolean seekBall(){
         int[] speed = getSpeed(seekerMatrix);
         this.setMotorSpeeds(speed[0],speed[1]);
-        //TODO if !ball found return false
-        
-        if ((getDistanceValue(2) == 1023) && 
-                (getDistanceValue(3) == 1023) && 
-                (lastPosition[0] != this.getLeftWheelPosition()) && 
-                (lastPosition[1] != this.getRightWheelPosition())){
-            
-            if (isTestedForWall == false){
-                isTestedForWall = true;
-                return false;
-            } else{
-                isTestedForWall = false;
-                return true;
-            }
+
+        if ((getDistanceValue(2) > 1000) && (getDistanceValue(3) > 1000)){
+            return true;
         }
-        
         return false;
     }
     
@@ -106,11 +97,11 @@ public class ex2t1 extends RobotController{
         this.setMotorSpeeds(speed[0],speed[1]); 
         
         if(this.lastPosition[0] == this.getLeftWheelPosition() && this.lastPosition[1] == this.getRightWheelPosition()){
-            return false;
+            return true;
         }
         this.lastPosition[0] = this.getLeftWheelPosition();
         this.lastPosition[1] = this.getRightWheelPosition();
-        return true;
+        return false;
     }
     
     private boolean backUp(){
@@ -132,7 +123,7 @@ public class ex2t1 extends RobotController{
 
         for (int i = 0; i < 8; i++) {
             
-            sensors[i] = (1023.0 - getDistanceValue(i)) / 1023.0;
+            sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
             
             l += sensors[i] * matrix[0][i];
             r += sensors[i] * matrix[1][i];
