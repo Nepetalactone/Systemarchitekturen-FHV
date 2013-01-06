@@ -1,5 +1,7 @@
  
 import edu.wsu.KheperaSimulator.RobotController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
  
 /*
  * To change this template, choose Tools | Templates
@@ -87,7 +89,7 @@ public class ex2t2 extends RobotController {
         int[] speed = getSpeed(seekerMatrix);
         this.setMotorSpeeds(speed[0], speed[1]);
  
-        if ((getDistanceValue(2) > 1000) || (getDistanceValue(3) > 1000)) {
+        if (getDistanceValue(2) > 1000 || (getDistanceValue(3) > 1000)) {
             return true;
         }
         return false;
@@ -95,7 +97,7 @@ public class ex2t2 extends RobotController {
  
     private int pushBallToLightsource() {
  
-        int[] speed = getSpeed(pusherMatrix);
+        int[] speed = getSpeedToLight(pusherMatrix);
         this.setMotorSpeeds(speed[0], speed[1]);
  
         //Roboter ist an einer Lichtquelle - Ziel erreicht
@@ -116,6 +118,10 @@ public class ex2t2 extends RobotController {
         int[] speed = getSpeed(frenchMatrix);
         this.setMotorSpeeds(speed[0], speed[1]);
  
+        if (this.getDistanceValue(7) > 1000 || this.getDistanceValue(6) > 1000) {
+            return true;
+        }
+ 
         if (Math.abs(this.lastPosition[0] - this.getLeftWheelPosition()) < backUpDistance && Math.abs(this.lastPosition[1] - this.getRightWheelPosition()) < backUpDistance) {
             return false;
         }
@@ -123,21 +129,45 @@ public class ex2t2 extends RobotController {
     }
  
     private boolean rotate() {
+        this.setMotorSpeeds(-2, -2);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException ex) {
+Logger.getLogger(ex2t2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setMotorSpeeds(5, -5);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+Logger.getLogger(ex2t2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
  
-        return false;
+    private int[] getSpeedToLight(double[][] matrix) {
+        double l = 0, r = 0;
+        double[] lightSensors = new double[8];
+ 
+        for (int i = 0; i < 8; i++){
+            lightSensors[i] = (getLightValue(i))/500.0; //400
+ 
+            l+= lightSensors[i] * matrix[0][i];
+            r+= lightSensors[i] * matrix[1][i];
+        }
+        return new int[]{(int) Math.round(l), (int) Math.round(r)};
     }
  
     private int[] getSpeed(double[][] matrix) {
         double l = 0, r = 0;
-        double[] sensors = new double[8];
+        double[] distSensors = new double[8];
  
         for (int i = 0; i < 8; i++) {
+            distSensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
  
-            sensors[i] = (1200.0 - getDistanceValue(i)) / 1000.0;
- 
-            l += sensors[i] * matrix[0][i];
-            r += sensors[i] * matrix[1][i];
+            l += distSensors[i] * matrix[0][i];
+            r += distSensors[i] * matrix[1][i];
         }
+ 
         return new int[]{(int) Math.round(l), (int) Math.round(r)};
     }
 }
