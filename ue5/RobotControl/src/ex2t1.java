@@ -37,8 +37,8 @@ public class ex2t1 extends RobotController{
             { -20, -20, 0, 5, 20, 20, 0, 0}
         };
         frenchMatrix = new double[][]{
-            { -5, -5, -5, -5,  5,  5, 0, 0},
-            {  5,  5, -5, -5, -5, -5, 0, 0}
+            { 0, 0, -5, -5,  0,  0, 0, 0},
+            { 0,  0, -2, -2, 0, 0, 0, 0}
         };
         
     }
@@ -78,29 +78,16 @@ public class ex2t1 extends RobotController{
     @Override
     public void close() throws Exception {
         
-        
     }
     
     private boolean seekBall(){
         int[] speed = getSpeed(seekerMatrix);
         this.setMotorSpeeds(speed[0],speed[1]);
-        
-        /*if ((getDistanceValue(2) == 1023) && 
-                (getDistanceValue(3) == 1023) && 
-                (lastPosition[0] != this.getLeftWheelPosition()) && 
-                (lastPosition[1] != this.getRightWheelPosition())){
-            
-            if (isTestedForWall == false){
-                isTestedForWall = true;
-                return false;
-            } else{
-                isTestedForWall = false;
-                return true;
-            }
+
+        if ((getDistanceValue(2) > 1000) || (getDistanceValue(3) > 1000)){
+            return true;
         }
-        
-        return false;*/
-        return true;
+        return false;
     }
     
     private boolean pushBallToEdge(){
@@ -121,8 +108,6 @@ public class ex2t1 extends RobotController{
         int[] speed = getSpeed(frenchMatrix);
         this.setMotorSpeeds(speed[0],speed[1]); 
         
-        
-        //TODO ned ganz sicher ob des so funktioniert, ma künnt anstatt zruckfahren o einfach solang dreha bis die hinteren sensoren an da wand stond
         if(Math.abs(this.lastPosition[0] - this.getLeftWheelPosition()) < backUpDistance && Math.abs(this.lastPosition[1] - this.getRightWheelPosition()) < backUpDistance){
             return false;
         }
